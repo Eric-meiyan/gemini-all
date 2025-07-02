@@ -213,5 +213,11 @@
     "mission_text": "为 Gemini CLI 开发者和爱好者创建最全面的资源中心。",
     "contact": "联系我们",
     "contribute": "贡献内容"
+  },
+  "stats": {
+    "totalViews": "总访问量:",
+    "viewsUnit": "次",
+    "totalVisitors": "总访客数:",
+    "visitorsUnit": "人"
   }
 }
