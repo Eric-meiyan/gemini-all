@@ -14,23 +14,19 @@
       "items": [
         {
           "title": "News",
-          "url": "/news",
-          "icon": "RiNewsLine"
+          "url": "/news"
         },
         {
           "title": "Blogs",
-          "url": "/blogs",
-          "icon": "RiArticleLine"
+          "url": "/blogs"
         },
         {
           "title": "Tools",
-          "url": "/tools",
-          "icon": "RiToolsLine"
+          "url": "/tools"
         },
         {
           "title": "About",
-          "url": "/about",
-          "icon": "RiInformationLine"
+          "url": "/about"
         }
       ]
     },
