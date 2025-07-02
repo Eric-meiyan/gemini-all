@@ -1,4 +1,45 @@
 User-agent: *
-Disallow: /*?*q=
+Allow: /
+
+# Allow main content pages
+Allow: /news
+Allow: /blogs  
+Allow: /tools
+Allow: /about
+Allow: /showcase
+Allow: /posts
+
+# Allow API endpoints that might be useful for indexing
+Allow: /api/ping
+
+# Disallow private/admin areas
+Disallow: /admin
+Disallow: /api-keys
+Disallow: /my-credits
+Disallow: /my-orders
+Disallow: /my-invites
+
+# Disallow authentication pages
+Disallow: /auth
+Disallow: /signin
+
+# Disallow legal pages (low SEO value)
 Disallow: /privacy-policy
 Disallow: /terms-of-service
+
+# Disallow search with sensitive parameters
+Disallow: /*?*token=
+Disallow: /*?*key=
+Disallow: /*?*session=
+
+# Allow general search and filter parameters
+Allow: /*?*search=
+Allow: /*?*category=
+Allow: /*?*tag=
+Allow: /*?*page=
+
+# Crawl delay (be respectful)
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://geminicli.org/sitemap.xml

@@ -1,7 +1,151 @@
 <?xml version='1.0' encoding='utf-8' standalone='yes'?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- Homepage -->
   <url>
-    <loc>https://shipany.ai/</loc>
-    <lastmod>2024-12-24T10:00:00+00:00</lastmod>
+    <loc>https://geminicli.org/</loc>
+    <lastmod>2025-07-02T10:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geminicli.org/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://geminicli.org/zh" />
+  </url>
+  
+  <!-- Chinese Homepage -->
+  <url>
+    <loc>https://geminicli.org/zh</loc>
+    <lastmod>2025-07-02T10:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geminicli.org/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://geminicli.org/zh" />
+  </url>
+
+  <!-- News Section -->
+  <url>
+    <loc>https://geminicli.org/news</loc>
+    <lastmod>2025-07-02T10:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geminicli.org/news" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://geminicli.org/zh/news" />
+  </url>
+  
+  <url>
+    <loc>https://geminicli.org/zh/news</loc>
+    <lastmod>2025-07-02T10:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geminicli.org/news" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://geminicli.org/zh/news" />
+  </url>
+
+  <!-- Blogs Section -->
+  <url>
+    <loc>https://geminicli.org/blogs</loc>
+    <lastmod>2025-07-02T10:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geminicli.org/blogs" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://geminicli.org/zh/blogs" />
+  </url>
+  
+  <url>
+    <loc>https://geminicli.org/zh/blogs</loc>
+    <lastmod>2025-07-02T10:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geminicli.org/blogs" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://geminicli.org/zh/blogs" />
+  </url>
+
+  <!-- Tools Section -->
+  <url>
+    <loc>https://geminicli.org/tools</loc>
+    <lastmod>2025-07-02T10:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geminicli.org/tools" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://geminicli.org/zh/tools" />
+  </url>
+  
+  <url>
+    <loc>https://geminicli.org/zh/tools</loc>
+    <lastmod>2025-07-02T10:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geminicli.org/tools" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://geminicli.org/zh/tools" />
+  </url>
+
+  <!-- About Section -->
+  <url>
+    <loc>https://geminicli.org/about</loc>
+    <lastmod>2025-07-02T10:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geminicli.org/about" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://geminicli.org/zh/about" />
+  </url>
+  
+  <url>
+    <loc>https://geminicli.org/zh/about</loc>
+    <lastmod>2025-07-02T10:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geminicli.org/about" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://geminicli.org/zh/about" />
+  </url>
+
+  <!-- Showcase Section -->
+  <url>
+    <loc>https://geminicli.org/showcase</loc>
+    <lastmod>2025-07-02T10:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geminicli.org/showcase" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://geminicli.org/zh/showcase" />
+  </url>
+  
+  <url>
+    <loc>https://geminicli.org/zh/showcase</loc>
+    <lastmod>2025-07-02T10:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geminicli.org/showcase" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://geminicli.org/zh/showcase" />
+  </url>
+
+  <!-- Legal Pages -->
+  <url>
+    <loc>https://geminicli.org/privacy-policy</loc>
+    <lastmod>2025-07-02T10:00:00+00:00</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+  <url>
+    <loc>https://geminicli.org/terms-of-service</loc>
+    <lastmod>2025-07-02T10:00:00+00:00</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- Posts Section (for future blog posts) -->
+  <url>
+    <loc>https://geminicli.org/posts</loc>
+    <lastmod>2025-07-02T10:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geminicli.org/posts" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://geminicli.org/zh/posts" />
+  </url>
+  
+  <url>
+    <loc>https://geminicli.org/zh/posts</loc>
+    <lastmod>2025-07-02T10:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://geminicli.org/posts" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://geminicli.org/zh/posts" />
   </url>
 </urlset>
