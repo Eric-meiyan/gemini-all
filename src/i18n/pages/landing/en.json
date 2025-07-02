@@ -354,5 +354,132 @@
         "icon": "RiMailLine"
       }
     ]
+  },
+  "footer": {
+    "name": "footer",
+    "brand": {
+      "title": "Gemini CLI Hub",
+      "description": "Your ultimate resource center for Gemini CLI development. Stay updated with the latest news, expert blogs, and essential tools.",
+      "logo": {
+        "src": "/logo.png",
+        "alt": "Gemini CLI Hub"
+      }
+    },
+    "nav": {
+      "items": [
+        {
+          "title": "Resources",
+          "children": [
+            {
+              "title": "News",
+              "url": "/news"
+            },
+            {
+              "title": "Blogs",
+              "url": "/blogs"
+            },
+            {
+              "title": "Tools",
+              "url": "/tools"
+            },
+            {
+              "title": "Documentation",
+              "url": "/docs"
+            }
+          ]
+        },
+        {
+          "title": "Community",
+          "children": [
+            {
+              "title": "GitHub",
+              "url": "https://github.com/geminicli",
+              "target": "_blank"
+            },
+            {
+              "title": "Discord",
+              "url": "https://discord.gg/geminicli",
+              "target": "_blank"
+            },
+            {
+              "title": "Twitter",
+              "url": "https://twitter.com/geminicli",
+              "target": "_blank"
+            },
+            {
+              "title": "Contributors",
+              "url": "/contributors"
+            }
+          ]
+        },
+        {
+          "title": "Support",
+          "children": [
+            {
+              "title": "Help Center",
+              "url": "/help"
+            },
+            {
+              "title": "Contact Us",
+              "url": "/contact"
+            },
+            {
+              "title": "Report Issue",
+              "url": "https://github.com/geminicli/issues",
+              "target": "_blank"
+            },
+            {
+              "title": "Feedback",
+              "url": "/feedback"
+            }
+          ]
+        }
+      ]
+    },
+    "social": {
+      "items": [
+        {
+          "title": "GitHub",
+          "icon": "RiGithubLine",
+          "url": "https://github.com/geminicli",
+          "target": "_blank"
+        },
+        {
+          "title": "Twitter",
+          "icon": "RiTwitterLine", 
+          "url": "https://twitter.com/geminicli",
+          "target": "_blank"
+        },
+        {
+          "title": "Discord",
+          "icon": "RiDiscordLine",
+          "url": "https://discord.gg/geminicli",
+          "target": "_blank"
+        },
+        {
+          "title": "LinkedIn",
+          "icon": "RiLinkedinLine",
+          "url": "https://linkedin.com/company/geminicli",
+          "target": "_blank"
+        }
+      ]
+    },
+    "agreement": {
+      "items": [
+        {
+          "title": "Privacy Policy",
+          "url": "/privacy-policy"
+        },
+        {
+          "title": "Terms of Service", 
+          "url": "/terms-of-service"
+        },
+        {
+          "title": "Cookie Policy",
+          "url": "/cookie-policy"
+        }
+      ]
+    },
+    "copyright": "© 2024 Gemini CLI Hub. All rights reserved."
   }
 }

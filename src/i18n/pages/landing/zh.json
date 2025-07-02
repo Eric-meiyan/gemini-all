@@ -354,5 +354,132 @@
         "icon": "RiMailLine"
       }
     ]
+  },
+  "footer": {
+    "name": "footer",
+    "brand": {
+      "title": "Gemini CLI 中心",
+      "description": "您的终极 Gemini CLI 开发资源中心。及时了解最新资讯、专家博客和必备工具。",
+      "logo": {
+        "src": "/logo.png",
+        "alt": "Gemini CLI 中心"
+      }
+    },
+    "nav": {
+      "items": [
+        {
+          "title": "资源",
+          "children": [
+            {
+              "title": "资讯",
+              "url": "/news"
+            },
+            {
+              "title": "博客",
+              "url": "/blogs"
+            },
+            {
+              "title": "工具",
+              "url": "/tools"
+            },
+            {
+              "title": "文档",
+              "url": "/docs"
+            }
+          ]
+        },
+        {
+          "title": "社区",
+          "children": [
+            {
+              "title": "GitHub",
+              "url": "https://github.com/geminicli",
+              "target": "_blank"
+            },
+            {
+              "title": "Discord",
+              "url": "https://discord.gg/geminicli",
+              "target": "_blank"
+            },
+            {
+              "title": "Twitter",
+              "url": "https://twitter.com/geminicli",
+              "target": "_blank"
+            },
+            {
+              "title": "贡献者",
+              "url": "/contributors"
+            }
+          ]
+        },
+        {
+          "title": "支持",
+          "children": [
+            {
+              "title": "帮助中心",
+              "url": "/help"
+            },
+            {
+              "title": "联系我们",
+              "url": "/contact"
+            },
+            {
+              "title": "报告问题",
+              "url": "https://github.com/geminicli/issues",
+              "target": "_blank"
+            },
+            {
+              "title": "反馈",
+              "url": "/feedback"
+            }
+          ]
+        }
+      ]
+    },
+    "social": {
+      "items": [
+        {
+          "title": "GitHub",
+          "icon": "RiGithubLine",
+          "url": "https://github.com/geminicli",
+          "target": "_blank"
+        },
+        {
+          "title": "Twitter",
+          "icon": "RiTwitterLine", 
+          "url": "https://twitter.com/geminicli",
+          "target": "_blank"
+        },
+        {
+          "title": "Discord",
+          "icon": "RiDiscordLine",
+          "url": "https://discord.gg/geminicli",
+          "target": "_blank"
+        },
+        {
+          "title": "LinkedIn",
+          "icon": "RiLinkedinLine",
+          "url": "https://linkedin.com/company/geminicli",
+          "target": "_blank"
+        }
+      ]
+    },
+    "agreement": {
+      "items": [
+        {
+          "title": "隐私政策",
+          "url": "/privacy-policy"
+        },
+        {
+          "title": "服务条款", 
+          "url": "/terms-of-service"
+        },
+        {
+          "title": "Cookie 政策",
+          "url": "/cookie-policy"
+        }
+      ]
+    },
+    "copyright": "© 2024 Gemini CLI 中心。保留所有权利。"
   }
 }

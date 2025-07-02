@@ -118,7 +118,7 @@ export default function AboutContent({ locale }: AboutContentProps) {
             </Link>
           </Button>
           <Button variant="outline" asChild>
-            <Link href="https://github.com/geminicli-hub" target="_blank">
+                            <Link href="https://github.com/geminicli" target="_blank">
               <Icon name="RiGithubLine" className="h-4 w-4 mr-2" />
               GitHub
             </Link>
