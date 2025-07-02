@@ -89,7 +89,7 @@ export const credits = pgTable("credits", {
   expired_at: timestamp({ withTimezone: true }),
 });
 
-// Posts table
+// Posts table (extended for content management)
 export const posts = pgTable("posts", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   uuid: varchar({ length: 255 }).notNull().unique(),
@@ -99,11 +99,22 @@ export const posts = pgTable("posts", {
   content: text(),
   created_at: timestamp({ withTimezone: true }),
   updated_at: timestamp({ withTimezone: true }),
-  status: varchar({ length: 50 }),
+  status: varchar({ length: 50 }).notNull().default("draft"), // draft, published
   cover_url: varchar({ length: 255 }),
   author_name: varchar({ length: 255 }),
   author_avatar_url: varchar({ length: 255 }),
-  locale: varchar({ length: 50 }),
+  locale: varchar({ length: 50 }).notNull().default("en"),
+  // New fields for content types
+  content_type: varchar({ length: 50 }).notNull().default("blog"), // news, blog, tool
+  category: varchar({ length: 100 }),
+  tags: text(), // JSON array of tags
+  source_url: varchar({ length: 500 }), // Original article URL
+  github_url: varchar({ length: 500 }), // GitHub repository (for tools)
+  rating: integer(), // Rating 1-5 (for tools)
+  difficulty: varchar({ length: 50 }), // beginner, intermediate, advanced
+  view_count: integer().notNull().default(0),
+  featured: boolean().notNull().default(false),
+  reading_time: integer(), // estimated reading time in minutes
 });
 
 // Affiliates table
@@ -127,4 +138,45 @@ export const feedbacks = pgTable("feedbacks", {
   user_uuid: varchar({ length: 255 }),
   content: text(),
   rating: integer(),
+});
+
+// Bookmarks table - for user bookmarks
+export const bookmarks = pgTable("bookmarks", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  user_uuid: varchar({ length: 255 }).notNull(),
+  post_uuid: varchar({ length: 255 }).notNull(),
+  created_at: timestamp({ withTimezone: true }).notNull(),
+}, (table) => [
+  uniqueIndex("user_post_unique_idx").on(table.user_uuid, table.post_uuid),
+]);
+
+// Subscriptions table - for newsletter subscriptions
+export const subscriptions = pgTable("subscriptions", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  email: varchar({ length: 255 }).notNull().unique(),
+  status: varchar({ length: 50 }).notNull().default("active"), // active, unsubscribed
+  created_at: timestamp({ withTimezone: true }).notNull(),
+  confirmed_at: timestamp({ withTimezone: true }),
+  categories: text(), // JSON array of subscribed categories
+});
+
+// Content views table - for tracking page views
+export const content_views = pgTable("content_views", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  post_uuid: varchar({ length: 255 }).notNull(),
+  user_uuid: varchar({ length: 255 }), // null for anonymous views
+  ip_address: varchar({ length: 45 }), // IPv4/IPv6
+  user_agent: text(),
+  created_at: timestamp({ withTimezone: true }).notNull(),
+});
+
+// Tags table - for tag management
+export const tags = pgTable("tags", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  name: varchar({ length: 100 }).notNull().unique(),
+  slug: varchar({ length: 100 }).notNull().unique(),
+  description: text(),
+  color: varchar({ length: 7 }), // hex color code
+  count: integer().notNull().default(0), // number of posts with this tag
+  created_at: timestamp({ withTimezone: true }).notNull(),
 });

@@ -1,79 +1,83 @@
 {
-  "template": "shipany-template-one",
+  "template": "gemini-cli-hub",
   "theme": "light",
   "header": {
     "brand": {
-      "title": "ShipAny",
+      "title": "Gemini CLI Hub",
       "logo": {
         "src": "/logo.png",
-        "alt": "ShipAny"
+        "alt": "Gemini CLI Hub"
       },
       "url": "/"
     },
     "nav": {
       "items": [
         {
-          "title": "Features",
-          "url": "/#feature",
-          "icon": "RiSparkling2Line"
+          "title": "News",
+          "url": "/news",
+          "icon": "RiNewsLine"
         },
         {
-          "title": "Pricing",
-          "url": "/pricing",
-          "icon": "RiMoneyDollarCircleLine"
+          "title": "Blogs",
+          "url": "/blogs",
+          "icon": "RiArticleLine"
         },
         {
-          "title": "Showcase",
-          "url": "/showcase",
-          "icon": "RiApps2Line"
+          "title": "Tools",
+          "url": "/tools",
+          "icon": "RiToolsLine"
+        },
+        {
+          "title": "About",
+          "url": "/about",
+          "icon": "RiInformationLine"
         }
       ]
     },
-    "buttons": [
-      {
-        "title": "Get ShipAny",
-        "url": "https://shipany.ai",
-        "target": "_blank",
-        "variant": "link",
-        "icon": "RiArrowRightUpLine"
-      }
-    ],
-    "show_sign": true,
+    "buttons": [],
+    "show_sign": false,
     "show_theme": true,
     "show_locale": true
   },
   "hero": {
-    "title": "Ship Any AI Startups in hours, not days",
-    "highlight_text": "Ship Any",
-    "description": "ShipAny is a NextJS boilerplate for building AI SaaS startups.<br/>Ship Fast with a variety of templates and components.",
+    "title": "Master Gemini CLI with Expert Resources",
+    "highlight_text": "Gemini CLI",
+    "description": "Your ultimate resource center for Gemini CLI development.<br/>Discover the latest news, expert blogs, and essential tools.",
     "announcement": {
-      "label": "2025",
-      "title": "🎉 Happy New Year",
-      "url": "/#pricing"
+      "label": "New",
+      "title": "🎉 Welcome to Gemini CLI Hub",
+      "url": "#features"
     },
-    "tip": "🎁 50% off before 2025",
+    "tip": "🚀 Everything you need to master Gemini CLI",
     "buttons": [
       {
-        "title": "Get Started",
-        "icon": "RiFlashlightFill",
-        "url": "/#pricing",
+        "title": "Explore Resources",
+        "icon": "RiCompassLine",
+        "url": "#features",
         "target": "_self",
         "variant": "default"
       },
       {
-        "title": "Join Discord",
-        "icon": "RiDiscordFill",
-        "url": "https://discord.gg/HQNnrzjZQS",
-        "target": "_blank",
+        "title": "Get Started",
+        "icon": "RiRocketLine",
+        "url": "/blogs",
+        "target": "_self",
         "variant": "outline"
       }
     ],
-    "show_happy_users": true,
+    "show_happy_users": false,
     "show_badge": false
   },
   "branding": {
-    "title": "ShipAny is built on the shoulders of giants",
+    "title": "Powered by Modern Technologies",
     "items": [
+      {
+        "title": "Google Gemini",
+        "image": {
+          "src": "/imgs/logos/gemini.svg",
+          "alt": "Google Gemini"
+        }
+      },
       {
         "title": "Next.js",
         "image": {
@@ -96,403 +100,259 @@
         }
       },
       {
-        "title": "Shadcn/UI",
+        "title": "TypeScript",
         "image": {
-          "src": "/imgs/logos/shadcn.svg",
-          "alt": "Shadcn/UI"
-        }
-      },
-      {
-        "title": "Vercel",
-        "image": {
-          "src": "/imgs/logos/vercel.svg",
-          "alt": "Vercel"
+          "src": "/imgs/logos/typescript.svg",
+          "alt": "TypeScript"
         }
       }
     ]
   },
   "introduce": {
     "name": "introduce",
-    "title": "What is ShipAny",
-    "label": "Introduce",
-    "description": "ShipAny is a NextJS boilerplate for building AI SaaS startups. Built in a variety of templates and components.",
+    "title": "Your Complete Gemini CLI Resource Center",
+    "label": "About",
+    "description": "Everything you need to master Gemini CLI development in one place. From breaking news to expert tutorials and essential tools.",
     "image": {
-      "src": "/imgs/features/1.png"
+      "src": "/imgs/features/gemini-cli.webp"
     },
     "items": [
       {
-        "title": "Ready-to-use Templates",
-        "description": "Choose from dozens of production-ready AI SaaS templates to quickly start your project.",
-        "icon": "RiNextjsFill"
+        "title": "Latest News & Updates",
+        "description": "Stay informed with the latest Gemini CLI announcements, updates, and community developments.",
+        "icon": "RiNewsLine"
       },
       {
-        "title": "Infrastructure Setup",
-        "description": "Get instant access to scalable infrastructure with best practices built-in.",
-        "icon": "RiDatabase2Line"
+        "title": "Expert Blogs & Tutorials",
+        "description": "Learn from industry experts with comprehensive guides, best practices, and advanced techniques.",
+        "icon": "RiArticleLine"
       },
       {
-        "title": "Quick Deployment",
-        "description": "Deploy your AI SaaS application to production in hours, not days.",
-        "icon": "RiCloudyFill"
+        "title": "Essential Tools & Extensions",
+        "description": "Discover and explore tools that enhance your Gemini CLI development workflow.",
+        "icon": "RiToolsLine"
       }
     ]
   },
   "benefit": {
     "name": "benefit",
-    "title": "Why Choose ShipAny",
+    "title": "Why Choose Gemini CLI Hub",
     "label": "Benefits",
-    "description": "Get everything you need to launch your AI startup - from ready-to-use templates to technical support.",
+    "description": "Everything you need to accelerate your Gemini CLI development journey in one comprehensive platform.",
     "items": [
       {
-        "title": "Complete Framework",
-        "description": "Built on Next.js with authentication, payments, and AI integration - everything works out of the box.",
-        "icon": "RiNextjsFill",
+        "title": "Comprehensive News Coverage",
+        "description": "Get the latest official updates, community news, and release notes all in one place.",
+        "icon": "RiGlobalLine",
         "image": {
-          "src": "/imgs/features/2.png"
+          "src": "/imgs/features/news.png"
         }
       },
       {
-        "title": "Rich Templates Library",
-        "description": "Choose from various AI SaaS templates to kickstart your project - chatbots, image generation, and more.",
-        "icon": "RiClapperboardAiLine",
+        "title": "Expert Knowledge Base",
+        "description": "Access curated blogs and tutorials from Gemini CLI experts and experienced developers.",
+        "icon": "RiBookOpenLine",
         "image": {
-          "src": "/imgs/features/3.png"
+          "src": "/imgs/features/blogs.png"
         }
       },
       {
-        "title": "Technical Guidance",
-        "description": "Get dedicated support and join our developer community to ensure your successful launch.",
-        "icon": "RiCodeFill",
+        "title": "Curated Tool Collection",
+        "description": "Discover and compare essential tools, extensions, and utilities for Gemini CLI development.",
+        "icon": "RiSettings3Line",
         "image": {
-          "src": "/imgs/features/4.png"
+          "src": "/imgs/features/tools.png"
         }
       }
     ]
   },
   "usage": {
     "name": "usage",
-    "title": "How to Launch with ShipAny",
-    "description": "Get your AI SaaS startup running in three simple steps:",
+    "title": "How to Get Started",
+    "description": "Begin your Gemini CLI journey with these simple steps:",
     "image": {
-      "src": "/imgs/features/1.png"
+      "src": "/imgs/features/getting-started.png"
     },
     "image_position": "left",
     "text_align": "center",
     "items": [
       {
-        "title": "Get ShipAny",
-        "description": "Buy ShipAny with a one-time payment. Check your email for the code and documentation.",
+        "title": "Explore the Latest News",
+        "description": "Start by checking out the latest Gemini CLI updates and announcements in our news section.",
         "image": {
-          "src": "/imgs/features/5.png"
+          "src": "/imgs/features/step1.png"
         }
       },
       {
-        "title": "Start Your Project",
-        "description": "Read the documentation and clone the code of ShipAny. Start building your AI SaaS startup.",
+        "title": "Read Expert Blogs",
+        "description": "Dive into our curated collection of expert blogs and tutorials to deepen your understanding.",
         "image": {
-          "src": "/imgs/features/6.png"
+          "src": "/imgs/features/step2.png"
         }
       },
       {
-        "title": "Customize Your Project",
-        "description": "Modify the template with your data and contents. Specific AI functionality needs.",
+        "title": "Discover Essential Tools",
+        "description": "Browse our tools section to find utilities and extensions that will enhance your workflow.",
         "image": {
-          "src": "/imgs/features/7.png"
-        }
-      },
-      {
-        "title": "Deploy to Production",
-        "description": "Deploy your project to production with a few steps and start serving customers immediately.",
-        "image": {
-          "src": "/imgs/features/8.png"
+          "src": "/imgs/features/step3.png"
         }
       }
     ]
   },
   "feature": {
     "name": "feature",
-    "title": "Key Features of ShipAny",
-    "description": "Everything you need to launch your AI SaaS startup quickly and efficiently.",
+    "title": "Platform Features",
+    "description": "Everything you need to stay ahead in Gemini CLI development",
     "items": [
       {
-        "title": "Next.js Boilerplate",
-        "description": "Production-ready Next.js templates with SEO-friendly structure and i18n support.",
-        "icon": "RiNextjsFill"
+        "title": "Real-time Updates",
+        "description": "Get the latest news and updates as they happen",
+        "icon": "RiRefreshLine"
       },
       {
-        "title": "Authentication & Payments",
-        "description": "Integrated Google OAuth, one-tap login, and Stripe payment processing.",
-        "icon": "RiKey2Fill"
+        "title": "Expert Content",
+        "description": "Curated blogs and tutorials from industry experts",
+        "icon": "RiStarLine"
       },
       {
-        "title": "Data Infrastructure",
-        "description": "Built-in Supabase integration for reliable and scalable data storage.",
-        "icon": "RiDatabase2Line"
+        "title": "Tool Discovery",
+        "description": "Find and compare the best Gemini CLI tools",
+        "icon": "RiSearchLine"
       },
       {
-        "title": "One-Click Deployment",
-        "description": "Seamless deployment to Vercel or Cloudflare with automated setup.",
-        "icon": "RiCloudy2Fill"
+        "title": "Community Driven",
+        "description": "Content sourced and vetted by the community",
+        "icon": "RiTeamLine"
       },
       {
-        "title": "Business Analytics",
-        "description": "Integrated Google Analytics and Search Console for tracking growth.",
-        "icon": "RiBarChart2Line"
+        "title": "Multi-language Support",
+        "description": "Available in multiple languages for global reach",
+        "icon": "RiTranslate2Line"
       },
       {
-        "title": "AI-Ready Infrastructure",
-        "description": "Pre-configured AI integration with built-in credits system and API sales.",
-        "icon": "RiRobot2Line"
+        "title": "Mobile Friendly",
+        "description": "Optimized experience across all devices",
+        "icon": "RiSmartphoneLine"
+      }
+    ]
+  },
+  "showcase": {
+    "name": "showcase",
+    "title": "Featured Content",
+    "description": "Discover our most popular resources",
+    "items": [
+      {
+        "title": "Getting Started with Gemini CLI",
+        "description": "Complete beginner's guide to Gemini CLI",
+        "image": {
+          "src": "/imgs/showcases/getting-started.png"
+        },
+        "url": "/blogs/getting-started-gemini-cli"
+      },
+      {
+        "title": "Advanced API Integration",
+        "description": "Learn advanced techniques for API integration",
+        "image": {
+          "src": "/imgs/showcases/api-integration.png"
+        },
+        "url": "/blogs/advanced-api-integration"
+      },
+      {
+        "title": "Essential CLI Tools",
+        "description": "Must-have tools for Gemini CLI development",
+        "image": {
+          "src": "/imgs/showcases/cli-tools.png"
+        },
+        "url": "/tools"
       }
     ]
   },
   "stats": {
-    "name": "stats",
-    "label": "Stats",
-    "title": "People Love ShipAny",
-    "description": "for it's easy to use and fast to ship.",
-    "icon": "FaRegHeart",
+    "title": "Community Impact",
     "items": [
       {
-        "title": "Trusted by",
-        "label": "99+",
-        "description": "Customers"
+        "title": "5,000+",
+        "description": "Active developers"
       },
       {
-        "title": "Built in",
-        "label": "20+",
-        "description": "Components"
+        "title": "500+",
+        "description": "Articles & tutorials"
       },
       {
-        "title": "Ship Fast in",
-        "label": "5",
-        "description": "Minutes"
+        "title": "100+",
+        "description": "Tools & extensions"
+      },
+      {
+        "title": "50+",
+        "description": "Expert contributors"
       }
     ]
   },
   "testimonial": {
-    "name": "testimonial",
-    "label": "Testimonial",
-    "title": "What Users Say About ShipAny",
-    "description": "Hear from developers and founders who launched their AI startups with ShipAny.",
-    "icon": "GoThumbsup",
+    "title": "What Developers Say",
+    "description": "Hear from developers who use Gemini CLI Hub",
     "items": [
       {
-        "title": "David Chen",
-        "label": "Founder of AIWallpaper.shop",
-        "description": "ShipAny saved us months of development time. We launched our AI wallpaper business in just 2 days and got our first paying customer within a week!",
-        "image": {
-          "src": "/imgs/users/1.png"
-        }
+        "name": "Alex Chen",
+        "title": "Senior Developer",
+        "avatar": "/imgs/users/alex-chen.png",
+        "content": "Gemini CLI Hub has become my go-to resource for staying updated with the latest developments. The curated content saves me hours of research."
       },
       {
-        "title": "Rachel Kim",
-        "label": "CTO at HeyBeauty.ai",
-        "description": "The pre-built AI infrastructure is a game-changer. We didn't have to worry about architecture - just focused on our AI beauty tech and went live fast.",
-        "image": {
-          "src": "/imgs/users/2.png"
-        }
+        "name": "Sarah Johnson",
+        "title": "AI Engineer", 
+        "avatar": "/imgs/users/sarah-johnson.png",
+        "content": "The expert blogs section is incredibly valuable. I've learned so many advanced techniques that have improved my Gemini CLI projects."
       },
       {
-        "title": "Marcus Thompson",
-        "label": "Solo Developer",
-        "description": "As a solo developer, ShipAny gave me everything I needed - auth, payments, AI integration, and beautiful UI. Launched my SaaS in a weekend!",
-        "image": {
-          "src": "/imgs/users/3.png"
-        }
-      },
-      {
-        "title": "Sofia Garcia",
-        "label": "CEO of Melodisco",
-        "description": "The templates are production-ready and highly customizable. We built our AI music platform in hours instead of months. Incredible time-to-market!",
-        "image": {
-          "src": "/imgs/users/4.png"
-        }
-      },
-      {
-        "title": "James Wilson",
-        "label": "Tech Lead at GPTs.works",
-        "description": "ShipAny's infrastructure is rock-solid. We scaled from 0 to 10k users without touching the backend. Best investment for our AI startup.",
-        "image": {
-          "src": "/imgs/users/5.png"
-        }
-      },
-      {
-        "title": "Anna Zhang",
-        "label": "Startup Founder",
-        "description": "From idea to launch in 3 days! ShipAny's templates and deployment tools made it possible to test our AI business concept incredibly fast.",
-        "image": {
-          "src": "/imgs/users/6.png"
-        }
+        "name": "Mike Rodriguez",
+        "title": "DevOps Engineer",
+        "avatar": "/imgs/users/mike-rodriguez.png", 
+        "content": "The tools section helped me discover utilities I never knew existed. My development workflow is now much more efficient."
       }
     ]
   },
   "faq": {
-    "name": "faq",
-    "label": "FAQ",
-    "title": "Frequently Asked Questions About ShipAny",
-    "description": "Have another question? Contact us on Discord or by email.",
+    "title": "Frequently Asked Questions",
     "items": [
       {
-        "title": "What exactly is ShipAny and how does it work?",
-        "description": "ShipAny is a comprehensive NextJS boilerplate designed specifically for building AI SaaS startups. It provides ready-to-use templates, infrastructure setup, and deployment tools that help you launch your AI business in hours instead of days."
+        "question": "What is Gemini CLI Hub?",
+        "answer": "Gemini CLI Hub is a comprehensive resource center providing the latest news, expert blogs, and essential tools for Gemini CLI development."
       },
       {
-        "title": "Do I need advanced technical skills to use ShipAny?",
-        "description": "While basic programming knowledge is helpful, ShipAny is designed to be developer-friendly. Our templates and documentation make it easy to get started, even if you're not an expert in AI or cloud infrastructure."
+        "question": "Is the content free to access?",
+        "answer": "Yes, all content on Gemini CLI Hub is free to access. We believe in making knowledge accessible to everyone."
       },
       {
-        "title": "What types of AI SaaS can I build with ShipAny?",
-        "description": "ShipAny supports a wide range of AI applications, from content generation to data analysis tools. Our templates cover popular use cases like AI chatbots, content generators, image processing apps, and more."
+        "question": "How often is content updated?",
+        "answer": "We update our content daily with the latest news and regularly add new blog posts and tools to our collection."
       },
       {
-        "title": "How long does it typically take to launch with ShipAny?",
-        "description": "With ShipAny, you can have a working prototype in hours and a production-ready application in hours. Our one-click deployment and pre-configured infrastructure significantly reduce the traditional months-long development cycle."
+        "question": "Can I contribute content?",
+        "answer": "Absolutely! We welcome contributions from the community. Check our contribution guidelines in the About section."
       },
       {
-        "title": "What's included in the ShipAny infrastructure?",
-        "description": "ShipAny provides a complete infrastructure stack including authentication, database setup, API integration, payment processing, and scalable cloud deployment. Everything is pre-configured following industry best practices."
-      },
-      {
-        "title": "Can I customize the templates to match my brand?",
-        "description": "Absolutely! All ShipAny templates are fully customizable. You can modify the design, features, and functionality to match your brand identity and specific business requirements while maintaining the robust underlying infrastructure."
+        "question": "Do you have a newsletter?",
+        "answer": "Yes, you can subscribe to our newsletter to receive weekly updates on the latest Gemini CLI developments."
       }
     ]
   },
   "cta": {
-    "name": "cta",
-    "title": "Ship your first AI SaaS Startup",
-    "description": "Start from here, ship with ShipAny.",
+    "title": "Ready to Master Gemini CLI?",
+    "description": "Join thousands of developers who rely on Gemini CLI Hub for the latest updates and expert insights.",
     "buttons": [
       {
-        "title": "Get ShipAny",
-        "url": "https://shipany.ai",
-        "target": "_blank",
-        "icon": "GoArrowUpRight"
+        "title": "Start Exploring",
+        "url": "/news",
+        "variant": "default",
+        "icon": "RiCompassLine"
       },
       {
-        "title": "Read Document",
-        "url": "https://docs.shipany.ai",
-        "target": "_blank",
-        "variant": "outline"
+        "title": "Subscribe to Updates",
+        "url": "#subscribe",
+        "variant": "outline",
+        "icon": "RiMailLine"
       }
     ]
-  },
-  "footer": {
-    "name": "footer",
-    "brand": {
-      "title": "ShipAny",
-      "description": "ShipAny is a NextJS boilerplate for building AI SaaS startups. Ship Fast with a variety of templates and components.",
-      "logo": {
-        "src": "/logo.png",
-        "alt": "ShipAny"
-      },
-      "url": "/"
-    },
-    "copyright": "© 2025 • ShipAny All rights reserved.",
-    "nav": {
-      "items": [
-        {
-          "title": "About",
-          "children": [
-            {
-              "title": "Features",
-              "url": "/#feature",
-              "target": "_self"
-            },
-            {
-              "title": "Showcases",
-              "url": "/#showcase",
-              "target": "_self"
-            },
-            {
-              "title": "Pricing",
-              "url": "/#pricing",
-              "target": "_self"
-            }
-          ]
-        },
-        {
-          "title": "Resources",
-          "children": [
-            {
-              "title": "Documents",
-              "url": "https://docs.shipany.ai",
-              "target": "_blank"
-            },
-            {
-              "title": "Components",
-              "url": "https://shipany.ai/components",
-              "target": "_blank"
-            },
-            {
-              "title": "Templates",
-              "url": "https://shipany.ai/templates",
-              "target": "_blank"
-            }
-          ]
-        },
-        {
-          "title": "Friends",
-          "children": [
-            {
-              "title": "ThinkAny",
-              "url": "https://thinkany.ai",
-              "target": "_blank"
-            },
-            {
-              "title": "HeyBeauty",
-              "url": "https://heybeauty.ai",
-              "target": "_blank"
-            },
-            {
-              "title": "Pagen",
-              "url": "https://pagen.so",
-              "target": "_blank"
-            }
-          ]
-        }
-      ]
-    },
-    "social": {
-      "items": [
-        {
-          "title": "X",
-          "icon": "RiTwitterXFill",
-          "url": "https://x.com/shipanyai",
-          "target": "_blank"
-        },
-        {
-          "title": "Github",
-          "icon": "RiGithubFill",
-          "url": "https://github.com/shipanyai",
-          "target": "_blank"
-        },
-        {
-          "title": "Discord",
-          "icon": "RiDiscordFill",
-          "url": "https://discord.gg/HQNnrzjZQS",
-          "target": "_blank"
-        },
-        {
-          "title": "Email",
-          "icon": "RiMailLine",
-          "url": "mailto:support@shipany.ai",
-          "target": "_self"
-        }
-      ]
-    },
-    "agreement": {
-      "items": [
-        {
-          "title": "Privacy Policy",
-          "url": "/privacy-policy"
-        },
-        {
-          "title": "Terms of Service",
-          "url": "/terms-of-service"
-        }
-      ]
-    }
   }
 }

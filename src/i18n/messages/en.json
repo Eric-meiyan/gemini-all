@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "title": "Ship Any AI SaaS Startups in hours | ShipAny",
-    "description": "ShipAny is a NextJS boilerplate for building AI SaaS startups, Ship Fast with a variety of templates and components.",
-    "keywords": "ShipAny, AI SaaS Boilerplate, NextJS Boilerplate"
+    "title": "Gemini CLI Hub - Master Gemini CLI with Expert Resources",
+    "description": "Your ultimate Gemini CLI resource center. Discover the latest news, expert blogs, tutorials, and essential tools for Gemini CLI development. Stay updated with official releases and community insights.",
+    "keywords": "Gemini CLI, Google Gemini, CLI tools, AI development, machine learning CLI, Gemini API, CLI tutorials, developer resources, AI tools, command line interface"
   },
   "user": {
     "sign_in": "Sign In",
@@ -121,5 +121,97 @@
     "contact_tip": "Other ways to contact us",
     "rating_tip": "How do you feel about ShipAny?",
     "placeholder": "Leave your words here..."
+  },
+  "site": {
+    "name": "Gemini CLI Hub",
+    "description": "Your Ultimate Gemini CLI Resource Center",
+    "slogan": "Master Gemini CLI with the latest news, expert blogs, and essential tools"
+  },
+  "nav": {
+    "home": "Home",
+    "news": "News", 
+    "blogs": "Blogs",
+    "tools": "Tools",
+    "about": "About",
+    "search": "Search",
+    "subscribe": "Subscribe"
+  },
+  "common": {
+    "all": "All",
+    "read_more": "Read More",
+    "view_all": "View All",
+    "loading": "Loading...",
+    "search_placeholder": "Search articles, tools...",
+    "no_results": "No results found",
+    "featured": "Featured",
+    "latest": "Latest",
+    "popular": "Popular",
+    "categories": "Categories",
+    "tags": "Tags",
+    "author": "Author",
+    "published_on": "Published on",
+    "updated_on": "Updated on",
+    "reading_time": "min read",
+    "share": "Share",
+    "bookmark": "Bookmark"
+  },
+  "hero": {
+    "title": "Master Gemini CLI",
+    "subtitle": "Discover the latest news, expert blogs, and essential tools for Gemini CLI development",
+    "cta_primary": "Explore Resources",
+    "cta_secondary": "Get Started",
+    "announcement": "🚀 Welcome to Gemini CLI Hub"
+  },
+  "sections": {
+    "latest_news": "Latest News",
+    "latest_news_desc": "Stay updated with the latest Gemini CLI developments",
+    "featured_blogs": "Featured Blogs", 
+    "featured_blogs_desc": "Expert insights and tutorials from the community",
+    "popular_tools": "Popular Tools",
+    "popular_tools_desc": "Essential tools to enhance your Gemini CLI experience",
+    "getting_started": "Getting Started",
+    "getting_started_desc": "New to Gemini CLI? Start your journey here"
+  },
+  "news": {
+    "title": "News & Updates",
+    "description": "Latest news, updates, and announcements about Gemini CLI",
+    "categories": {
+      "official": "Official Updates",
+      "community": "Community News", 
+      "releases": "Release Notes",
+      "tutorials": "Tutorials"
+    }
+  },
+  "blogs": {
+    "title": "Expert Blogs",
+    "description": "In-depth articles and tutorials from Gemini CLI experts",
+    "tags": {
+      "getting_started": "Getting Started",
+      "advanced": "Advanced Usage",
+      "best_practices": "Best Practices", 
+      "troubleshooting": "Troubleshooting",
+      "api": "API Integration",
+      "performance": "Performance",
+      "security": "Security"
+    }
+  },
+  "tools": {
+    "title": "Essential Tools",
+    "description": "Discover tools and extensions that enhance your Gemini CLI workflow",
+    "categories": {
+      "cli_extensions": "CLI Extensions",
+      "ide_plugins": "IDE Plugins",
+      "config_tools": "Configuration Tools",
+      "monitoring": "Monitoring Tools",
+      "development": "Development Tools"
+    }
+  },
+  "about": {
+    "title": "About Gemini CLI Hub",
+    "description": "Learn more about our mission to provide comprehensive Gemini CLI resources",
+    "mission": "Our Mission",
+    "mission_text": "To create the most comprehensive resource center for Gemini CLI developers and enthusiasts.",
+    "contact": "Contact Us",
+    "contribute": "Contribute"
   }
 }

@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "title": "几小时内构建任何 AI SaaS 创业项目 | ShipAny",
-    "description": "ShipAny 是一个用于构建 AI SaaS 创业项目的 NextJS 模板，提供各种模板和组件，帮助您快速启动。",
-    "keywords": "ShipAny, AI SaaS 模板, NextJS 模板"
+    "title": "Gemini CLI 中心 - 通过专家资源掌握 Gemini CLI",
+    "description": "您的终极 Gemini CLI 资源中心。发现最新资讯、专家博客、教程和 Gemini CLI 开发必备工具。及时了解官方发布和社区见解。",
+    "keywords": "Gemini CLI, Google Gemini, CLI 工具, AI 开发, 机器学习 CLI, Gemini API, CLI 教程, 开发者资源, AI 工具, 命令行界面"
   },
   "user": {
     "sign_in": "登录",
@@ -119,7 +119,99 @@
     "submit": "提交",
     "loading": "提交中...",
     "contact_tip": "其他联系方式",
-    "rating_tip": "您对 ShipAny 的看法如何？",
-    "placeholder": "在这里留下您的反馈..."
+    "rating_tip": "您对 ShipAny 的感受如何？",
+    "placeholder": "在此留下您的意见..."
+  },
+  "site": {
+    "name": "Gemini CLI 中心",
+    "description": "您的终极 Gemini CLI 资源中心",
+    "slogan": "通过最新资讯、专家博客和必备工具掌握 Gemini CLI"
+  },
+  "nav": {
+    "home": "首页",
+    "news": "资讯", 
+    "blogs": "博客",
+    "tools": "工具",
+    "about": "关于",
+    "search": "搜索",
+    "subscribe": "订阅"
+  },
+  "common": {
+    "all": "全部",
+    "read_more": "阅读更多",
+    "view_all": "查看全部",
+    "loading": "加载中...",
+    "search_placeholder": "搜索文章、工具...",
+    "no_results": "未找到结果",
+    "featured": "精选",
+    "latest": "最新",
+    "popular": "热门",
+    "categories": "分类",
+    "tags": "标签",
+    "author": "作者",
+    "published_on": "发布于",
+    "updated_on": "更新于",
+    "reading_time": "分钟阅读",
+    "share": "分享",
+    "bookmark": "收藏"
+  },
+  "hero": {
+    "title": "掌握 Gemini CLI",
+    "subtitle": "发现最新资讯、专家博客和 Gemini CLI 开发必备工具",
+    "cta_primary": "探索资源",
+    "cta_secondary": "立即开始",
+    "announcement": "🚀 欢迎来到 Gemini CLI 中心"
+  },
+  "sections": {
+    "latest_news": "最新资讯",
+    "latest_news_desc": "了解 Gemini CLI 的最新发展动态",
+    "featured_blogs": "精选博客", 
+    "featured_blogs_desc": "来自社区的专家见解和教程",
+    "popular_tools": "热门工具",
+    "popular_tools_desc": "增强您 Gemini CLI 体验的必备工具",
+    "getting_started": "入门指南",
+    "getting_started_desc": "初次接触 Gemini CLI？从这里开始您的旅程"
+  },
+  "news": {
+    "title": "资讯与更新",
+    "description": "关于 Gemini CLI 的最新资讯、更新和公告",
+    "categories": {
+      "official": "官方更新",
+      "community": "社区资讯", 
+      "releases": "发布说明",
+      "tutorials": "教程"
+    }
+  },
+  "blogs": {
+    "title": "专家博客",
+    "description": "来自 Gemini CLI 专家的深度文章和教程",
+    "tags": {
+      "getting_started": "入门指南",
+      "advanced": "高级用法",
+      "best_practices": "最佳实践", 
+      "troubleshooting": "故障排除",
+      "api": "API 集成",
+      "performance": "性能优化",
+      "security": "安全"
+    }
+  },
+  "tools": {
+    "title": "必备工具",
+    "description": "发现增强您 Gemini CLI 工作流程的工具和扩展",
+    "categories": {
+      "cli_extensions": "CLI 扩展",
+      "ide_plugins": "IDE 插件",
+      "config_tools": "配置工具",
+      "monitoring": "监控工具",
+      "development": "开发工具"
+    }
+  },
+  "about": {
+    "title": "关于 Gemini CLI 中心",
+    "description": "了解我们提供全面 Gemini CLI 资源的使命",
+    "mission": "我们的使命",
+    "mission_text": "为 Gemini CLI 开发者和爱好者创建最全面的资源中心。",
+    "contact": "联系我们",
+    "contribute": "贡献内容"
   }
 }

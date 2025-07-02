@@ -1,9 +1,9 @@
 {
-  "name": "shipany-template-one",
-  "version": "2.5.1",
+  "name": "gemini-cli-hub",
+  "version": "1.0.0",
   "private": true,
-  "author": "idoubi",
-  "homepage": "https://shipany.ai",
+  "author": "Gemini CLI Hub Team",
+  "homepage": "https://geminicli.com",
   "scripts": {
     "dev": "cross-env NODE_NO_WARNINGS=1 next dev --turbopack",
     "build": "next build",
