@@ -90,9 +90,9 @@ export default function NewsContent({ locale, searchParams }: NewsContentProps) 
   };
 
   return (
-    <div className="container py-8">
+    <article className="container py-8" itemScope itemType="https://schema.org/CollectionPage">
       {/* Header */}
-      <div className="mb-8">
+      <header className="mb-8">
         <h1 className="text-3xl font-bold mb-4">
           {t("news.title")}
           {!loading && (
@@ -101,12 +101,15 @@ export default function NewsContent({ locale, searchParams }: NewsContentProps) 
               size="sm" 
               onClick={refresh}
               className="ml-4"
+              aria-label="Refresh news content"
             >
               <Icon name="RiRefreshLine" className="h-4 w-4" />
             </Button>
           )}
         </h1>
-        <p className="text-muted-foreground text-lg">{t("news.description")}</p>
+        <p className="text-muted-foreground text-lg" itemProp="description">
+          {t("news.description")}
+        </p>
         
         {/* Error Alert */}
         {error && (
@@ -115,9 +118,9 @@ export default function NewsContent({ locale, searchParams }: NewsContentProps) 
             <AlertDescription>
               {error}. <Button variant="link" onClick={refresh} className="p-0 h-auto">Try again</Button>
             </AlertDescription>
-          </Alert>
-        )}
-      </div>
+                     </Alert>
+         )}
+      </header>
 
       {/* Search and Filters */}
       <div className="mb-8 flex flex-col md:flex-row gap-4">
@@ -344,6 +347,6 @@ export default function NewsContent({ locale, searchParams }: NewsContentProps) 
           </Button>
         </div>
       </div>
-    </div>
+    </article>
   );
 } 

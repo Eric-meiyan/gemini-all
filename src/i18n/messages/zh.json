@@ -173,8 +173,9 @@
     "getting_started_desc": "初次接触 Gemini CLI？从这里开始您的旅程"
   },
   "news": {
-    "title": "资讯与更新",
-    "description": "关于 Gemini CLI 的最新资讯、更新和公告",
+    "title": "Gemini CLI 资讯中心 - 最新AI命令行工具动态",
+    "description": "获取最新的 Gemini CLI 资讯、Google AI 更新、命令行工具发展趋势、API 发布动态和社区见解。您的 Gemini CLI 信息权威来源。",
+    "keywords": "Gemini CLI, 谷歌Gemini, AI命令行, Google AI, CLI工具, 机器学习CLI, Gemini API, CLI开发, AI资讯, 谷歌开发者",
     "categories": {
       "official": "官方更新",
       "community": "社区资讯", 

@@ -173,8 +173,9 @@
     "getting_started_desc": "New to Gemini CLI? Start your journey here"
   },
   "news": {
-    "title": "News & Updates",
-    "description": "Latest news, updates, and announcements about Gemini CLI",
+    "title": "Gemini CLI News & Updates - Latest AI CLI Development News",
+    "description": "Stay updated with the latest Gemini CLI news, Google AI updates, CLI development trends, API releases, and community insights. Your ultimate source for Gemini CLI information.",
+    "keywords": "Gemini CLI, Google Gemini, AI CLI, Google AI, CLI tools, machine learning CLI, Gemini API, CLI development, AI news, Google developers",
     "categories": {
       "official": "Official Updates",
       "community": "Community News", 
