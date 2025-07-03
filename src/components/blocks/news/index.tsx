@@ -8,55 +8,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import Icon from "@/components/icon";
 import { Link } from "@/i18n/navigation";
 import moment from "moment";
-
-// Mock data for now - will be replaced with real data later
-const mockNews = [
-  {
-    uuid: "1",
-    title: "Google Gemini 2.0 Flash Released with Enhanced CLI Support",
-    description: "The latest version of Google Gemini introduces improved command-line interface capabilities with better performance and new features.",
-    category: "official",
-    author_name: "Google AI Team",
-    author_avatar_url: "/imgs/users/google-team.png",
-    cover_url: "/imgs/news/gemini-2-0-flash.png",
-    created_at: new Date("2024-12-15"),
-    reading_time: 5,
-    featured: true,
-    tags: ["gemini", "cli", "release", "google"],
-    source_url: "https://developers.googleblog.com/gemini-2-0-flash"
-  },
-  {
-    uuid: "2", 
-    title: "Community Tutorial: Advanced Gemini CLI Workflows",
-    description: "Learn how to create sophisticated automation workflows using Gemini CLI with real-world examples and best practices.",
-    category: "tutorials",
-    author_name: "Alex Chen",
-    author_avatar_url: "/imgs/users/alex-chen.png",
-    cover_url: "/imgs/news/cli-workflows.png",
-    created_at: new Date("2024-12-14"),
-    reading_time: 8,
-    featured: false,
-    tags: ["tutorial", "workflow", "automation", "advanced"],
-    source_url: "https://medium.com/gemini-cli-advanced-workflows"
-  },
-  {
-    uuid: "3",
-    title: "New CLI Extensions Available in Marketplace",
-    description: "Discover the latest community-developed extensions that enhance your Gemini CLI experience with additional functionality.",
-    category: "community",
-    author_name: "CLI Hub Team",
-    author_avatar_url: "/imgs/users/cli-hub.png", 
-    cover_url: "/imgs/news/marketplace-extensions.png",
-    created_at: new Date("2024-12-13"),
-    reading_time: 4,
-    featured: false,
-    tags: ["extensions", "marketplace", "community"],
-    source_url: "#"
-  }
-];
+import { useNews } from "@/hooks/use-news";
+import { TransformedNews } from "@/types/newsapi";
+import { SafeImage, SafeAvatar } from "@/components/ui/safe-image";
 
 interface NewsContentProps {
   locale: string;
@@ -68,7 +27,12 @@ export default function NewsContent({ locale, searchParams }: NewsContentProps) 
   const [searchQuery, setSearchQuery] = useState((searchParams.q as string) || "");
   const [selectedCategory, setSelectedCategory] = useState((searchParams.category as string) || "all");
   const [sortBy, setSortBy] = useState((searchParams.sort as string) || "latest");
-  const [filteredNews, setFilteredNews] = useState(mockNews);
+  const [filteredNews, setFilteredNews] = useState<TransformedNews[]>([]);
+  
+  // Fetch news data with refresh every 30 minutes
+  const { news, loading, error, refresh } = useNews({ 
+    refreshInterval: 30 * 60 * 1000 // 30 minutes
+  });
 
   const categories = [
     { value: "all", label: t("common.all") },
@@ -79,37 +43,37 @@ export default function NewsContent({ locale, searchParams }: NewsContentProps) 
   ];
 
   useEffect(() => {
-    let filtered = mockNews;
+    let filtered = news;
 
     // Filter by search query
     if (searchQuery) {
-      filtered = filtered.filter(news => 
-        news.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        news.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        news.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+      filtered = filtered.filter((newsItem: TransformedNews) => 
+        newsItem.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        newsItem.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        newsItem.tags.some((tag: string) => tag.toLowerCase().includes(searchQuery.toLowerCase()))
       );
     }
 
     // Filter by category
     if (selectedCategory !== "all") {
-      filtered = filtered.filter(news => news.category === selectedCategory);
+      filtered = filtered.filter((newsItem: TransformedNews) => newsItem.category === selectedCategory);
     }
 
     // Sort
     switch (sortBy) {
       case "latest":
-        filtered.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+        filtered.sort((a: TransformedNews, b: TransformedNews) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
         break;
       case "popular":
         // Would sort by view_count in real implementation
         break;
       case "alphabetical":
-        filtered.sort((a, b) => a.title.localeCompare(b.title));
+        filtered.sort((a: TransformedNews, b: TransformedNews) => a.title.localeCompare(b.title));
         break;
     }
 
     setFilteredNews(filtered);
-  }, [searchQuery, selectedCategory, sortBy]);
+  }, [searchQuery, selectedCategory, sortBy, news]);
 
   const formatDate = (date: Date) => {
     return moment(date).locale(locale).format("MMM DD, YYYY");
@@ -129,8 +93,30 @@ export default function NewsContent({ locale, searchParams }: NewsContentProps) 
     <div className="container py-8">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-4">{t("news.title")}</h1>
+        <h1 className="text-3xl font-bold mb-4">
+          {t("news.title")}
+          {!loading && (
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              onClick={refresh}
+              className="ml-4"
+            >
+              <Icon name="RiRefreshLine" className="h-4 w-4" />
+            </Button>
+          )}
+        </h1>
         <p className="text-muted-foreground text-lg">{t("news.description")}</p>
+        
+        {/* Error Alert */}
+        {error && (
+          <Alert className="mt-4" variant="destructive">
+            <Icon name="RiErrorWarningLine" className="h-4 w-4" />
+            <AlertDescription>
+              {error}. <Button variant="link" onClick={refresh} className="p-0 h-auto">Try again</Button>
+            </AlertDescription>
+          </Alert>
+        )}
       </div>
 
       {/* Search and Filters */}
@@ -172,18 +158,74 @@ export default function NewsContent({ locale, searchParams }: NewsContentProps) 
         </Select>
       </div>
 
+      {/* Loading Skeleton */}
+      {loading && (
+        <div className="space-y-8">
+          <div>
+            <Skeleton className="h-8 w-48 mb-4" />
+            <div className="grid gap-6 md:grid-cols-2">
+              {Array.from({ length: 2 }).map((_, i) => (
+                <Card key={i} className="overflow-hidden">
+                  <Skeleton className="aspect-video w-full" />
+                  <CardContent className="p-6">
+                    <Skeleton className="h-6 w-full mb-2" />
+                    <Skeleton className="h-4 w-3/4 mb-4" />
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <Skeleton className="w-8 h-8 rounded-full" />
+                        <div>
+                          <Skeleton className="h-4 w-20 mb-1" />
+                          <Skeleton className="h-3 w-16" />
+                        </div>
+                      </div>
+                      <Skeleton className="h-8 w-20" />
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+          
+          <div>
+            <Skeleton className="h-8 w-32 mb-4" />
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <Card key={i} className="overflow-hidden">
+                  <Skeleton className="aspect-video w-full" />
+                  <CardContent className="p-6">
+                    <Skeleton className="h-5 w-full mb-2" />
+                    <Skeleton className="h-4 w-full mb-1" />
+                    <Skeleton className="h-4 w-2/3 mb-4" />
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <Skeleton className="w-6 h-6 rounded-full" />
+                        <div>
+                          <Skeleton className="h-3 w-16 mb-1" />
+                          <Skeleton className="h-3 w-12" />
+                        </div>
+                      </div>
+                      <Skeleton className="h-6 w-6" />
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Featured News */}
-      {filteredNews.some(news => news.featured) && (
+      {!loading && filteredNews.some(news => news.featured) && (
         <div className="mb-8">
           <h2 className="text-2xl font-semibold mb-4">{t("common.featured")}</h2>
           <div className="grid gap-6 md:grid-cols-2">
             {filteredNews.filter(news => news.featured).map((news) => (
               <Card key={news.uuid} className="overflow-hidden">
                 <div className="aspect-video relative">
-                  <img 
+                  <SafeImage 
                     src={news.cover_url} 
                     alt={news.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full"
                   />
                   <Badge className={`absolute top-4 left-4 ${getCategoryColor(news.category)}`}>
                     {t(`news.categories.${news.category}`)}
@@ -195,10 +237,10 @@ export default function NewsContent({ locale, searchParams }: NewsContentProps) 
                   
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <img 
+                      <SafeAvatar 
                         src={news.author_avatar_url} 
                         alt={news.author_name}
-                        className="w-8 h-8 rounded-full"
+                        size="md"
                       />
                       <div className="text-sm">
                         <p className="font-medium">{news.author_name}</p>
@@ -211,9 +253,9 @@ export default function NewsContent({ locale, searchParams }: NewsContentProps) 
                         {news.reading_time} {t("common.reading_time")}
                       </span>
                       <Button variant="outline" size="sm" asChild>
-                        <Link href={news.source_url} target="_blank">
+                        <a href={news.source_url} target="_blank" rel="noopener noreferrer">
                           {t("common.read_more")}
-                        </Link>
+                        </a>
                       </Button>
                     </div>
                   </div>
@@ -225,16 +267,25 @@ export default function NewsContent({ locale, searchParams }: NewsContentProps) 
       )}
 
       {/* All News */}
-      <div className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">{t("common.latest")}</h2>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {filteredNews.map((news) => (
+      {!loading && (
+        <div className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4">{t("common.latest")}</h2>
+          
+          {filteredNews.length === 0 && !error ? (
+            <div className="text-center py-12">
+              <Icon name="RiNewspaperLine" className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
+              <p className="text-lg font-medium mb-2">No news found</p>
+              <p className="text-muted-foreground">Try adjusting your search or category filters</p>
+            </div>
+          ) : (
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {filteredNews.map((news) => (
             <Card key={news.uuid} className="overflow-hidden">
               <div className="aspect-video relative">
-                <img 
+                <SafeImage 
                   src={news.cover_url} 
                   alt={news.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full"
                 />
                 <Badge className={`absolute top-4 left-4 ${getCategoryColor(news.category)}`}>
                   {t(`news.categories.${news.category}`)}
@@ -246,10 +297,10 @@ export default function NewsContent({ locale, searchParams }: NewsContentProps) 
                 
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <img 
+                    <SafeAvatar 
                       src={news.author_avatar_url} 
                       alt={news.author_name}
-                      className="w-6 h-6 rounded-full"
+                      size="sm"
                     />
                     <div className="text-xs">
                       <p className="font-medium">{news.author_name}</p>
@@ -258,16 +309,18 @@ export default function NewsContent({ locale, searchParams }: NewsContentProps) 
                   </div>
                   
                   <Button variant="ghost" size="sm" asChild>
-                    <Link href={news.source_url} target="_blank">
+                    <a href={news.source_url} target="_blank" rel="noopener noreferrer">
                       <Icon name="RiArrowRightLine" className="h-4 w-4" />
-                    </Link>
+                    </a>
                   </Button>
                 </div>
               </CardContent>
             </Card>
           ))}
+            </div>
+          )}
         </div>
-      </div>
+      )}
 
       {/* Pagination */}
       <div className="flex justify-center">
