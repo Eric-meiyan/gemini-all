@@ -119,6 +119,14 @@ const getAuthorAvatar = (source: string): string => {
   return `/imgs/users/${avatarIndex}.png`;
 };
 
+// Helper function to get timestamp from Date or string
+const getTimestamp = (dateValue: Date | string): number => {
+  if (typeof dateValue === 'string') {
+    return new Date(dateValue).getTime();
+  }
+  return dateValue.getTime();
+};
+
 // Transform NewsAPI article to our format
 const transformArticle = (article: NewsAPIArticle): TransformedNews => {
   const tags = extractTags(article);
@@ -188,7 +196,7 @@ export async function getGeminiNews(): Promise<TransformedNews[]> {
     const transformedNews = uniqueArticles.map(transformArticle);
     
     // Sort by date (newest first)
-    transformedNews.sort((a, b) => b.created_at.getTime() - a.created_at.getTime());
+    transformedNews.sort((a, b) => getTimestamp(b.created_at) - getTimestamp(a.created_at));
     
     // Mark top 2 articles as featured
     transformedNews.slice(0, 2).forEach(article => {
@@ -236,7 +244,7 @@ export async function getOfficialGeminiNews(): Promise<TransformedNews[]> {
       article.featured = true;
     });
     
-    return transformedNews.sort((a, b) => b.created_at.getTime() - a.created_at.getTime());
+    return transformedNews.sort((a, b) => getTimestamp(b.created_at) - getTimestamp(a.created_at));
     
   } catch (error) {
     console.error('Error fetching official Gemini news:', error);

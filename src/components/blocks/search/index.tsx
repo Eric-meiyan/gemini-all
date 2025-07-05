@@ -60,7 +60,6 @@ export default function SearchContent({ locale, searchParams }: SearchContentPro
     const filtered = news.filter((newsItem: TransformedNews) => 
       newsItem.title.toLowerCase().includes(query) ||
       newsItem.description.toLowerCase().includes(query) ||
-      newsItem.content.toLowerCase().includes(query) ||
       newsItem.tags.some((tag: string) => tag.toLowerCase().includes(query)) ||
       newsItem.author_name.toLowerCase().includes(query)
     );
@@ -68,7 +67,12 @@ export default function SearchContent({ locale, searchParams }: SearchContentPro
     // Categorize results
     const categorizedResults = {
       all: filtered,
-      news: filtered.filter(item => item.category === "news"),
+      news: filtered.filter(item => 
+        item.category === "official" || 
+        item.category === "community" || 
+        item.category === "releases" || 
+        item.category === "tutorials"
+      ),
       tools: filtered.filter(item => item.category === "tools"),
       blog: filtered.filter(item => item.category === "blog")
     };

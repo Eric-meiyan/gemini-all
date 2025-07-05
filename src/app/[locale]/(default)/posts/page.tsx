@@ -1,6 +1,4 @@
-import Blog from "@/components/blocks/blog";
-import { BlogItem, Blog as BlogType } from "@/types/blocks/blog";
-import { getPostsByLocale } from "@/models/post";
+import BlogContent from "@/components/blocks/blog";
 import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata({
@@ -28,20 +26,13 @@ export async function generateMetadata({
 
 export default async function PostsPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const { locale } = await params;
-  const t = await getTranslations();
+  const search = await searchParams;
 
-  const posts = await getPostsByLocale(locale);
-
-  const blog: BlogType = {
-    title: t("blog.title"),
-    description: t("blog.description"),
-    items: posts as unknown as BlogItem[],
-    read_more_text: t("blog.read_more_text"),
-  };
-
-  return <Blog blog={blog} />;
+  return <BlogContent locale={locale} searchParams={search} />;
 }
