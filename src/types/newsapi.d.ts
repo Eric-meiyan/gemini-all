@@ -32,11 +32,11 @@ export interface TransformedNews {
   uuid: string;
   title: string;
   description: string;
-  category: "official" | "community" | "releases" | "tutorials";
+  category: "official" | "community" | "releases" | "tutorials" | "tools" | "blog";
   author_name: string;
   author_avatar_url: string;
   cover_url: string;
-  created_at: Date;
+  created_at: Date | string; // Can be Date object or string (after JSON serialization)
   reading_time: number;
   featured: boolean;
   tags: string[];

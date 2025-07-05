@@ -5,7 +5,7 @@ const NEWS_API_KEY = process.env.NEWS_API_KEY || process.env.NEXT_PUBLIC_NEWS_AP
 const NEWS_API_BASE_URL = 'https://newsapi.org/v2';
 
 // Category mapping based on source and keywords
-const getCategoryFromArticle = (article: NewsAPIArticle): "official" | "community" | "releases" | "tutorials" => {
+const getCategoryFromArticle = (article: NewsAPIArticle): "official" | "community" | "releases" | "tutorials" | "tools" | "blog" => {
   const title = article.title.toLowerCase();
   const description = (article.description || '').toLowerCase();
   const source = article.source.name.toLowerCase();
@@ -13,6 +13,24 @@ const getCategoryFromArticle = (article: NewsAPIArticle): "official" | "communit
   // Official sources
   if (source.includes('google') || source.includes('developers') || source.includes('cloud')) {
     return 'official';
+  }
+  
+  // Tool reviews and experiences
+  if (title.includes('review') || title.includes('experience') || title.includes('using') ||
+      title.includes('tool') || title.includes('efficiency') || title.includes('productivity') ||
+      title.includes('refactor') || title.includes('boost') || title.includes('improve') ||
+      description.includes('review') || description.includes('using') || description.includes('tool') ||
+      description.includes('efficiency') || description.includes('productivity')) {
+    return 'tools';
+  }
+  
+  // Developer blogs and insights
+  if (title.includes('development') || title.includes('plugin') || title.includes('api') ||
+      title.includes('integration') || title.includes('workflow') || title.includes('tips') ||
+      title.includes('insight') || title.includes('experience') || title.includes('build') ||
+      description.includes('development') || description.includes('plugin') || description.includes('workflow') ||
+      description.includes('insight') || description.includes('build')) {
+    return 'blog';
   }
   
   // Release keywords

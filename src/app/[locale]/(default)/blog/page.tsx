@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
-import ToolsContent from "@/components/blocks/tools";
+import BlogContent from "@/components/blocks/blog";
 import { Skeleton } from "@/components/ui/skeleton";
 import Script from "next/script";
 
@@ -14,16 +14,16 @@ export async function generateMetadata({
   const baseUrl = process.env.NEXT_PUBLIC_WEB_URL || 'https://geminicli.org';
   
   const title = locale === 'zh' 
-    ? "Gemini CLI 工具体验中心 - 效率提升工具评测与分享"
-    : "Gemini CLI Tools & Reviews - Productivity Enhancement Tools";
+    ? "Gemini CLI 开发者博客 - 深度技术文章与开发教程"
+    : "Gemini CLI Developer Blog - In-depth Technical Articles & Development Tutorials";
     
   const description = locale === 'zh'
-    ? "探索 Gemini CLI 工具生态系统，获取最新的工具评测、使用技巧和效率提升方案，帮助开发者选择最适合的工具。"
-    : "Explore the Gemini CLI tools ecosystem with the latest tool reviews, usage tips, and productivity solutions to help developers choose the best tools.";
+    ? "探索 Gemini CLI 开发技术，阅读深度技术文章，学习最新的开发教程和最佳实践，提升您的 AI 开发技能。"
+    : "Explore Gemini CLI development techniques, read in-depth technical articles, learn the latest development tutorials and best practices to enhance your AI development skills.";
     
   const keywords = locale === 'zh'
-    ? "Gemini CLI, 工具评测, 生产力工具, 命令行工具, AI 工具, 开发工具, 效率提升, 工具推荐"
-    : "Gemini CLI, tool reviews, productivity tools, command line tools, AI tools, development tools, efficiency, tool recommendations";
+    ? "Gemini CLI, 开发者博客, 技术文章, 开发教程, AI 开发, 插件开发, API 集成, 最佳实践"
+    : "Gemini CLI, developer blog, technical articles, development tutorials, AI development, plugin development, API integration, best practices";
 
   return {
     title,
@@ -43,7 +43,7 @@ export async function generateMetadata({
     openGraph: {
       title,
       description,
-      url: `${baseUrl}/${locale}/tools`,
+      url: `${baseUrl}/${locale}/blog`,
       siteName: "Gemini CLI Hub",
       type: "website",
       locale: locale,
@@ -52,7 +52,7 @@ export async function generateMetadata({
           url: `${baseUrl}/imgs/features/gemini-cli.webp`,
           width: 1200,
           height: 630,
-          alt: "Gemini CLI Tools & Reviews",
+          alt: "Gemini CLI Developer Blog",
         },
       ],
     },
@@ -64,20 +64,20 @@ export async function generateMetadata({
       creator: "@GeminiCLIHub",
     },
     alternates: {
-      canonical: `${baseUrl}/${locale}/tools`,
+      canonical: `${baseUrl}/${locale}/blog`,
       languages: {
-        'en': `${baseUrl}/en/tools`,
-        'zh': `${baseUrl}/zh/tools`,
+        'en': `${baseUrl}/en/blog`,
+        'zh': `${baseUrl}/zh/blog`,
       },
     },
     other: {
-      'article:section': 'Tools',
-      'article:tag': 'Gemini CLI, Tools, Reviews, Productivity',
+      'article:section': 'Technology',
+      'article:tag': 'Gemini CLI, Development, Tutorials, AI',
     },
   };
 }
 
-function ToolsSkeleton() {
+function BlogSkeleton() {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -110,7 +110,7 @@ function ToolsSkeleton() {
   );
 }
 
-export default async function ToolsPage({
+export default async function BlogPage({
   params,
   searchParams,
 }: {
@@ -126,13 +126,28 @@ export default async function ToolsPage({
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "WebPage",
-        "@id": `${baseUrl}/${locale}/tools#webpage`,
-        "url": `${baseUrl}/${locale}/tools`,
-        "name": locale === 'zh' ? "Gemini CLI 工具体验中心" : "Gemini CLI Tools & Reviews",
+        "@type": "Blog",
+        "@id": `${baseUrl}/${locale}/blog#blog`,
+        "url": `${baseUrl}/${locale}/blog`,
+        "name": locale === 'zh' ? "Gemini CLI 开发者博客" : "Gemini CLI Developer Blog",
         "description": locale === 'zh' 
-          ? "探索 Gemini CLI 工具生态系统，获取最新的工具评测、使用技巧和效率提升方案"
-          : "Explore the Gemini CLI tools ecosystem with the latest tool reviews, usage tips, and productivity solutions",
+          ? "探索 Gemini CLI 开发技术，阅读深度技术文章，学习最新的开发教程和最佳实践"
+          : "Explore Gemini CLI development techniques, read in-depth technical articles, learn the latest development tutorials and best practices",
+        "publisher": {
+          "@type": "Organization",
+          "@id": `${baseUrl}/#organization`,
+          "name": "Gemini CLI Hub"
+        },
+        "inLanguage": locale === 'zh' ? "zh-CN" : "en-US"
+      },
+      {
+        "@type": "WebPage",
+        "@id": `${baseUrl}/${locale}/blog#webpage`,
+        "url": `${baseUrl}/${locale}/blog`,
+        "name": locale === 'zh' ? "Gemini CLI 开发者博客" : "Gemini CLI Developer Blog",
+        "description": locale === 'zh' 
+          ? "探索 Gemini CLI 开发技术，阅读深度技术文章和开发教程"
+          : "Explore Gemini CLI development techniques, read in-depth technical articles and development tutorials",
         "isPartOf": {
           "@type": "WebSite",
           "@id": `${baseUrl}/#website`,
@@ -159,25 +174,11 @@ export default async function ToolsPage({
             {
               "@type": "ListItem", 
               "position": 2,
-              "name": locale === 'zh' ? "工具" : "Tools",
-              "item": `${baseUrl}/${locale}/tools`
+              "name": locale === 'zh' ? "博客" : "Blog",
+              "item": `${baseUrl}/${locale}/blog`
             }
           ]
         }
-      },
-      {
-        "@type": "CollectionPage",
-        "@id": `${baseUrl}/${locale}/tools#collection`,
-        "name": locale === 'zh' ? "Gemini CLI 工具评测" : "Gemini CLI Tool Reviews",
-        "description": locale === 'zh' 
-          ? "最新的 Gemini CLI 工具评测和使用心得"
-          : "Latest Gemini CLI tool reviews and usage experiences",
-        "mainEntity": {
-          "@type": "ItemList",
-          "name": "Tool Reviews",
-          "description": "Reviews and experiences with Gemini CLI tools"
-        },
-        "inLanguage": locale === 'zh' ? "zh-CN" : "en-US"
       }
     ]
   };
@@ -185,14 +186,14 @@ export default async function ToolsPage({
   return (
     <div className="min-h-screen">
       <Script
-        id="tools-structured-data"
+        id="blog-structured-data"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(structuredData)
         }}
       />
-      <Suspense fallback={<ToolsSkeleton />}>
-        <ToolsContent locale={locale} searchParams={search} />
+      <Suspense fallback={<BlogSkeleton />}>
+        <BlogContent locale={locale} searchParams={search} />
       </Suspense>
     </div>
   );
