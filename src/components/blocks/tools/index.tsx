@@ -214,7 +214,7 @@ export default function ToolsContent({ locale, searchParams }: ToolsContentProps
                 Clear Search
               </Button>
             )}
-            <Link href="/news">
+            <Link href="/">
               <Button>
                 <Icon name="RiArrowLeftLine" className="mr-2 h-4 w-4" />
                 Back to News

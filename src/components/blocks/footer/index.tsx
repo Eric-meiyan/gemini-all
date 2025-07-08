@@ -70,7 +70,7 @@ export default function Footer({ footer }: { footer: FooterType }) {
             <h4 className="text-lg font-semibold text-white mb-4">Quick Links</h4>
             <ul className="space-y-3">
               <li>
-                <a href="/news" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <a href="/" className="text-gray-400 hover:text-white transition-colors duration-200">
                   News Center
                 </a>
               </li>

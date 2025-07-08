@@ -301,7 +301,7 @@ export default function SearchContent({ locale, searchParams }: SearchContentPro
                   <Button onClick={handleClearSearch} variant="outline">
                     Clear Search
                   </Button>
-                  <Link href="/news">
+                  <Link href="/">
                     <Button>
                       <Icon name="RiNewspaperLine" className="mr-2 h-4 w-4" />
                       Browse All News
@@ -355,7 +355,7 @@ export default function SearchContent({ locale, searchParams }: SearchContentPro
 
             {/* Quick Navigation */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-              <Link href="/news" className="group">
+                              <Link href="/" className="group">
                 <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
                   <Icon name="RiNewspaperLine" className="h-8 w-8 text-blue-600 mx-auto mb-3" />
                   <h4 className="font-semibold text-gray-900 mb-2">News Center</h4>

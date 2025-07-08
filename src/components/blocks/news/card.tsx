@@ -25,6 +25,11 @@ export default function NewsCard({
   showAuthor = true,
   showStats = true,
 }: NewsCardProps) {
+  // Safety check for news data
+  if (!news || !news.uuid) {
+    return null;
+  }
+
   const formatDate = (date: Date | string) => {
     return moment(date).locale(locale).format("MMM DD, YYYY");
   };

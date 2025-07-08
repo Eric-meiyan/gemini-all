@@ -123,7 +123,7 @@ export default function NewsContent({ locale, searchParams }: NewsContentProps) 
             <div className="mb-10">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-bold text-gray-900">Latest News</h2>
-                <Link href="/news" className="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                <Link href="/" className="text-blue-600 hover:text-blue-800 font-medium flex items-center">
                   View All
                   <Icon name="RiArrowRightSLine" className="ml-1 h-4 w-4" />
                 </Link>
@@ -215,37 +215,14 @@ export default function NewsContent({ locale, searchParams }: NewsContentProps) 
                 </div>
               </div>
 
-              {/* Top Contributors */}
-              <div className="bg-white rounded-xl shadow-sm p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Top Contributors</h3>
-                <div className="space-y-4">
-                  {[1, 2, 3, 4, 5].map((user) => (
-                    <div key={user} className="flex items-center">
-                      <div className="flex-shrink-0 mr-3 relative">
-                        <img
-                          src={`/imgs/users/${user}.png`}
-                          alt={`User ${user}`}
-                          className="w-10 h-10 rounded-full"
-                        />
-                        <span className="absolute -top-1 -right-1 flex items-center justify-center w-5 h-5 bg-blue-600 text-white text-xs font-bold rounded-full">
-                          {user}
-                        </span>
-                      </div>
-                      <div>
-                        <h4 className="text-sm font-medium text-gray-900">Tech Expert {user}</h4>
-                        <p className="text-xs text-gray-500">{30 - user * 3} contributions</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+
 
               {/* Latest Discussions */}
               <div className="bg-white rounded-xl shadow-sm p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Latest Discussions</h3>
                 <div className="space-y-4">
                   {[1, 2, 3, 4].map((topic) => (
-                    <Link key={topic} href="#" className="block hover:bg-gray-50 -mx-3 px-3 py-2 rounded-lg">
+                    <div key={topic} className="block hover:bg-gray-50 -mx-3 px-3 py-2 rounded-lg cursor-pointer">
                       <h4 className="text-sm font-medium text-gray-900 mb-1">
                         Can Gemini CLI Completely Replace Traditional Code Editors?
                       </h4>
@@ -254,7 +231,7 @@ export default function NewsContent({ locale, searchParams }: NewsContentProps) 
                         <span className="mx-2">•</span>
                         <span>2 hours ago</span>
                       </div>
-                    </Link>
+                    </div>
                   ))}
                 </div>
               </div>

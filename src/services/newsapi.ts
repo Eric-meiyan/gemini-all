@@ -1,5 +1,4 @@
 import { NewsAPIResponse, NewsAPIArticle, TransformedNews } from '@/types/newsapi';
-import { v4 as uuidv4 } from 'uuid';
 
 const NEWS_API_KEY = process.env.NEWS_API_KEY || process.env.NEXT_PUBLIC_NEWS_API_KEY;
 const NEWS_API_BASE_URL = 'https://newsapi.org/v2';
@@ -127,6 +126,21 @@ const getTimestamp = (dateValue: Date | string): number => {
   return dateValue.getTime();
 };
 
+// Generate consistent UUID from URL
+const generateConsistentUUID = (url: string): string => {
+  // Use a simple hash function to generate consistent UUID from URL
+  let hash = 0;
+  for (let i = 0; i < url.length; i++) {
+    const char = url.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash; // Convert to 32bit integer
+  }
+  
+  // Convert hash to hex string and format as UUID
+  const hashStr = Math.abs(hash).toString(16).padStart(8, '0');
+  return `${hashStr.slice(0, 8)}-${hashStr.slice(0, 4)}-${hashStr.slice(0, 4)}-${hashStr.slice(0, 4)}-${hashStr.slice(0, 12)}`;
+};
+
 // Transform NewsAPI article to our format
 const transformArticle = (article: NewsAPIArticle): TransformedNews => {
   const tags = extractTags(article);
@@ -134,7 +148,7 @@ const transformArticle = (article: NewsAPIArticle): TransformedNews => {
   const readingTime = calculateReadingTime(article.content || article.description || '');
   
   return {
-    uuid: uuidv4(),
+    uuid: generateConsistentUUID(article.url),
     title: article.title,
     description: article.description || '',
     category,

@@ -43,3 +43,5 @@ Makefile
 wrangler.toml
 supabase
 .*next
+
+*.myself.md

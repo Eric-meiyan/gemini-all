@@ -29,7 +29,7 @@ export default function Header({ header }: { header: HeaderType }) {
   };
 
   const navigationItems = [
-    { title: "News", href: "/news", icon: "RiNewspaperLine" },
+    { title: "Home", href: "/", icon: "RiHomeLine" },
     { title: "Tools", href: "/tools", icon: "RiToolsLine" },
     { title: "Blog", href: "/blog", icon: "RiBookOpenLine" },
   ];

@@ -278,7 +278,7 @@ export default function BlogContent({ locale, searchParams }: BlogContentProps) 
                   Show All Categories
                 </Button>
               )}
-              <Link href="/news">
+                              <Link href="/">
                 <Button>
                   <Icon name="RiArrowLeftLine" className="mr-2 h-4 w-4" />
                   Back to News

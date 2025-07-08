@@ -14,6 +14,11 @@ interface HeroBannerProps {
 }
 
 export default function HeroBanner({ news, locale }: HeroBannerProps) {
+  // Safety check for news data
+  if (!news || !news.uuid) {
+    return null;
+  }
+
   const formatDate = (date: Date | string) => {
     return moment(date).locale(locale).format("MMM DD, YYYY");
   };
