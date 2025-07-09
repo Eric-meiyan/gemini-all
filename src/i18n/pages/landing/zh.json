@@ -32,8 +32,8 @@
     },
     "buttons": [ ],
     "show_sign": false,
-    "show_theme": true,
-    "show_locale": true
+    "show_theme": false,
+    "show_locale": false
   },
   "hero": {
     "title": "通过专家资源掌握 Gemini CLI",
