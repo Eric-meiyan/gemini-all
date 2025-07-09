@@ -1,16 +1,26 @@
 "use client";
 
-import { GoogleAnalytics as NextGoogleAnalytics } from "@next/third-parties/google";
+import Script from "next/script";
 
 export default function GoogleAnalytics() {
   if (process.env.NODE_ENV !== "production") {
     return null;
   }
 
-  const analyticsId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
-  if (!analyticsId) {
-    return null;
-  }
-
-  return <NextGoogleAnalytics gaId={analyticsId} />;
+  return (
+    <>
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-W31HRTQJB3"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-W31HRTQJB3');
+        `}
+      </Script>
+    </>
+  );
 }
