@@ -90,18 +90,7 @@ export default function Header({ header }: { header: HeaderType }) {
             {header.show_locale && <LocaleToggle />}
             {header.show_theme && <ThemeToggle />}
 
-            {/* Auth Buttons */}
-            <Button 
-              variant="ghost" 
-              className="px-4 py-2 text-sm font-medium text-blue-600 hover:text-blue-800 rounded-full"
-            >
-              Login
-            </Button>
-            <Button 
-              className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-full shadow-sm"
-            >
-              Sign Up
-            </Button>
+            
             {header.show_sign && <SignToggle />}
           </div>
 
