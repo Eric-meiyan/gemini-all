@@ -71,34 +71,21 @@ export default function Footer({ footer }: { footer: FooterType }) {
             <ul className="space-y-3">
               <li>
                 <a href="/" className="text-gray-400 hover:text-white transition-colors duration-200">
-                  News Center
+                  News
                 </a>
               </li>
               <li>
                 <a href="/tools" className="text-gray-400 hover:text-white transition-colors duration-200">
-                  Tool Experience
+                  Tools
                 </a>
               </li>
               <li>
                 <a href="/blog" className="text-gray-400 hover:text-white transition-colors duration-200">
-                  Developer Blog
+                  Blog
                 </a>
               </li>
-              <li>
-                <a href="/community" className="text-gray-400 hover:text-white transition-colors duration-200">
-                  Community Discussion
-                </a>
-              </li>
-              <li>
-                <a href="/showcase" className="text-gray-400 hover:text-white transition-colors duration-200">
-                  Showcase
-                </a>
-              </li>
-              <li>
-                <a href="/pricing" className="text-gray-400 hover:text-white transition-colors duration-200">
-                  Pricing
-                </a>
-              </li>
+              
+             
             </ul>
           </div>
 
@@ -131,11 +118,7 @@ export default function Footer({ footer }: { footer: FooterType }) {
                   Cookie Policy
                 </a>
               </li>
-              <li>
-                <a href="/api" className="text-gray-400 hover:text-white transition-colors duration-200">
-                  API Documentation
-                </a>
-              </li>
+             
             </ul>
           </div>
 
