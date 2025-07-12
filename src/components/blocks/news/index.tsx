@@ -11,6 +11,7 @@ import { Link } from "@/i18n/navigation";
 import { useNews } from "@/hooks/use-news";
 import { TransformedNews } from "@/types/newsapi";
 import HeroBanner from "@/components/blocks/hero-banner";
+import HeroCarousel, { newsToCarouselItem, type HeroCarouselItem } from "@/components/blocks/hero-carousel";
 import NewsCard from "@/components/blocks/news/card";
 
 interface NewsContentProps {
@@ -37,6 +38,63 @@ export default function NewsContent({ locale, searchParams }: NewsContentProps) 
 
   // Get featured news for banner
   const featuredNews = news.find(item => item.featured) || news[0];
+
+  // Create carousel items with diverse content
+  const createHeroCarouselItems = (): HeroCarouselItem[] => {
+    const items: HeroCarouselItem[] = [];
+
+    // Add featured news as first item
+    if (featuredNews) {
+      items.push(newsToCarouselItem(featuredNews));
+    }
+
+    // Add a platform stats item
+    items.push({
+      id: "platform-stats",
+      type: "stat",
+      title: "Growing Gemini CLI Community",
+      description: "Join thousands of developers using Gemini CLI tools and resources. Discover the latest trends and connect with fellow developers.",
+      image: "/imgs/features/gemini-cli.webp",
+      category: "feature",
+      badge: "Community",
+      stats: [
+        { label: "Active Users", value: "5,000+" },
+        { label: "Tools Reviewed", value: "100+" },
+        { label: "Articles Published", value: "500+" },
+        { label: "Expert Contributors", value: "50+" }
+      ],
+      link: "/about"
+    });
+
+    // Add tool spotlight if we have tool-related news
+    const toolNews = news.find(item => item.category === "tools");
+    if (toolNews) {
+      items.push({
+        id: "tool-spotlight",
+        type: "feature",
+        title: "Featured Tool Review",
+        description: toolNews.description,
+        image: toolNews.cover_url,
+        category: "tools",
+        badge: "Tool Spotlight",
+        link: `/news/${toolNews.uuid}`
+      });
+    }
+
+    // Add community announcement
+    items.push({
+      id: "community-announcement",
+      type: "announcement", 
+      title: "Join Our Developer Community",
+      description: "Connect with fellow Gemini CLI developers, share your projects, get help, and stay updated with the latest developments in AI-powered development tools.",
+      image: "/imgs/features/2.png",
+      category: "announcement",
+      badge: "Community",
+      link: "/about"
+    });
+
+    return items;
+  };
 
   useEffect(() => {
     let filtered = news;
@@ -110,10 +168,8 @@ export default function NewsContent({ locale, searchParams }: NewsContentProps) 
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Hero Banner */}
-        {featuredNews && (
-          <HeroBanner news={featuredNews} locale={locale} />
-        )}
+        {/* Hero Carousel */}
+        <HeroCarousel items={createHeroCarouselItems()} locale={locale} />
 
         {/* Main Content Layout */}
         <div className="flex flex-col lg:flex-row gap-8">
