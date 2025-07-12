@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import Icon from "@/components/icon";
 import { Link } from "@/i18n/navigation";
 import ToolCard from "@/components/blocks/tool-card";
+import GitHubProjectsShowcase from "@/components/blocks/github-showcase";
 import { ToolReview } from "@/types/tools";
 import { getTools, getFeaturedTools, searchTools, toolCategories, sortOptions } from "@/services/tools";
 
@@ -237,6 +238,22 @@ export default function ToolsContent({ locale, searchParams }: ToolsContentProps
                 Clear filters
               </Button>
             )}
+          </div>
+        )}
+
+        {/* GitHub Projects Section */}
+        {!searchQuery && category === "all" && (
+          <div className="mb-16">
+            <GitHubProjectsShowcase
+              locale={locale}
+              title={locale === 'zh' ? 'GitHub 开源项目数据' : 'GitHub Open Source Projects'}
+              description={locale === 'zh' 
+                ? '实时展示相关开源项目的活跃度、星标数量和健康度评分，帮助您了解项目的发展状况。'
+                : 'Real-time display of related open source projects activity, star counts, and health scores to help you understand project development status.'
+              }
+              variant="grid"
+              maxItems={6}
+            />
           </div>
         )}
 

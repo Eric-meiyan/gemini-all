@@ -146,7 +146,7 @@ export default function Feedback({
                   {socialLinks?.map((link, index) => (
                     <a
                       key={index}
-                      href={link.url}
+                      href={link.url || "#"}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-muted-foreground hover:text-primary transition-colors"

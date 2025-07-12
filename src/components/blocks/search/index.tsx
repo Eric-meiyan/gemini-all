@@ -13,8 +13,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Icon from "@/components/icon";
 import { Link } from "@/i18n/navigation";
 import { useNews } from "@/hooks/use-news";
-import { TransformedNews } from "@/types/newsapi";
-import NewsCard from "@/components/blocks/news/card";
+import SearchResultCard from "@/components/blocks/search-result-card";
+import { 
+  searchAll, 
+  SearchResult, 
+  SearchOptions,
+  getPopularSearchTerms,
+  getSearchHistory,
+  saveSearchHistory,
+  clearSearchHistory
+} from "@/services/search";
 
 interface SearchContentProps {
   locale: string;
@@ -26,111 +34,142 @@ export default function SearchContent({ locale, searchParams }: SearchContentPro
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState((searchParams.q as string) || "");
   const [sortBy, setSortBy] = useState((searchParams.sort as string) || "relevance");
-  const [category, setCategory] = useState((searchParams.category as string) || "all");
-  const [activeTab, setActiveTab] = useState((searchParams.tab as string) || "all");
-  const [filteredNews, setFilteredNews] = useState<TransformedNews[]>([]);
-  const [searchResults, setSearchResults] = useState<{
-    all: TransformedNews[];
-    news: TransformedNews[];
-    tools: TransformedNews[];
-    blog: TransformedNews[];
-  }>({
-    all: [],
-    news: [],
-    tools: [],
-    blog: []
-  });
+  const [typeFilter, setTypeFilter] = useState((searchParams.type as string) || "all");
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+  const [totalResults, setTotalResults] = useState(0);
+  const [hasMore, setHasMore] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [searchHistory, setSearchHistory] = useState<string[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
   
-  // Fetch news data
-  const { news, loading, error, refresh } = useNews({ 
+  // Fetch news data for search
+  const { news, loading: newsLoading, error } = useNews({ 
     refreshInterval: 30 * 60 * 1000 // 30 minutes
   });
 
-  // Search and filter logic
+  // Load search history on mount
   useEffect(() => {
-    if (!searchQuery.trim()) {
-      setFilteredNews([]);
-      setSearchResults({ all: [], news: [], tools: [], blog: [] });
+    setSearchHistory(getSearchHistory());
+  }, []);
+
+  // Perform search
+  const performSearch = async (query: string, options: Partial<SearchOptions> = {}) => {
+    if (!query.trim()) {
+      setSearchResults([]);
+      setTotalResults(0);
+      setHasMore(false);
+      setSuggestions([]);
       return;
     }
 
-    const query = searchQuery.toLowerCase();
-    
-    // Filter by search query
-    const filtered = news.filter((newsItem: TransformedNews) => 
-      newsItem.title.toLowerCase().includes(query) ||
-      newsItem.description.toLowerCase().includes(query) ||
-      newsItem.tags.some((tag: string) => tag.toLowerCase().includes(query)) ||
-      newsItem.author_name.toLowerCase().includes(query)
-    );
+    setLoading(true);
+    try {
+      const searchOptions: SearchOptions = {
+        query,
+        type: typeFilter as any,
+        sortBy: sortBy as any,
+        limit: 20,
+        offset: 0,
+        ...options
+      };
 
-    // Categorize results
-    const categorizedResults = {
-      all: filtered,
-      news: filtered.filter(item => 
-        item.category === "official" || 
-        item.category === "community" || 
-        item.category === "releases" || 
-        item.category === "tutorials"
-      ),
-      tools: filtered.filter(item => item.category === "tools"),
-      blog: filtered.filter(item => item.category === "blog")
-    };
-
-    // Sort results
-    const sortResults = (items: TransformedNews[]) => {
-      switch (sortBy) {
-        case "relevance":
-          // Simple relevance scoring based on title match
-          return items.sort((a, b) => {
-            const aScore = a.title.toLowerCase().includes(query) ? 2 : 0;
-            const bScore = b.title.toLowerCase().includes(query) ? 2 : 0;
-            return bScore - aScore;
-          });
-        case "latest":
-          return items.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
-        case "oldest":
-          return items.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
-        case "alphabetical":
-          return items.sort((a, b) => a.title.localeCompare(b.title));
-        default:
-          return items;
+      const response = await searchAll(searchOptions, news, locale);
+      setSearchResults(response.results);
+      setTotalResults(response.total);
+      setHasMore(response.hasMore);
+      setSuggestions(response.suggestions || []);
+      
+      // Save to search history
+      if (query.trim()) {
+        saveSearchHistory(query);
+        setSearchHistory(getSearchHistory());
       }
-    };
+    } catch (error) {
+      console.error('Search error:', error);
+      setSearchResults([]);
+      setTotalResults(0);
+      setHasMore(false);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    const sortedResults = {
-      all: sortResults([...categorizedResults.all]),
-      news: sortResults([...categorizedResults.news]),
-      tools: sortResults([...categorizedResults.tools]),
-      blog: sortResults([...categorizedResults.blog])
-    };
+  // Search when query, filter, or sort changes
+  useEffect(() => {
+    if (searchQuery.trim()) {
+      performSearch(searchQuery);
+    } else {
+      setSearchResults([]);
+      setTotalResults(0);
+      setHasMore(false);
+      setSuggestions([]);
+    }
+  }, [searchQuery, sortBy, typeFilter, news]);
 
-    setSearchResults(sortedResults);
-    setFilteredNews(sortedResults[activeTab as keyof typeof sortedResults] || sortedResults.all);
-  }, [searchQuery, sortBy, activeTab, news]);
-
-  // Handle search
+  // Handle search form submission
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
       const params = new URLSearchParams();
       params.set('q', searchQuery);
       if (sortBy !== 'relevance') params.set('sort', sortBy);
-      if (activeTab !== 'all') params.set('tab', activeTab);
+      if (typeFilter !== 'all') params.set('type', typeFilter);
       router.push(`/search?${params.toString()}`);
+      setShowSuggestions(false);
     }
   };
 
   // Handle clear search
   const handleClearSearch = () => {
     setSearchQuery("");
-    setFilteredNews([]);
-    setSearchResults({ all: [], news: [], tools: [], blog: [] });
+    setSearchResults([]);
+    setTotalResults(0);
+    setHasMore(false);
+    setSuggestions([]);
+    setShowSuggestions(false);
     router.push('/search');
   };
 
+  // Handle suggestion click
+  const handleSuggestionClick = (suggestion: string) => {
+    setSearchQuery(suggestion);
+    setShowSuggestions(false);
+    const params = new URLSearchParams();
+    params.set('q', suggestion);
+    router.push(`/search?${params.toString()}`);
+  };
+
+  // Group results by type
+  const groupedResults = {
+    all: searchResults,
+    news: searchResults.filter(r => r.type === 'news'),
+    tools: searchResults.filter(r => r.type === 'tools'),
+    faq: searchResults.filter(r => r.type === 'faq'),
+    github: searchResults.filter(r => r.type === 'github'),
+    blog: searchResults.filter(r => r.type === 'blog')
+  };
+
+  // Filter options
+  const typeOptions = [
+    { value: "all", label: locale === 'zh' ? "全部内容" : "All Content", icon: "RiGlobalLine" },
+    { value: "news", label: locale === 'zh' ? "新闻" : "News", icon: "RiNewspaperLine" },
+    { value: "tools", label: locale === 'zh' ? "工具" : "Tools", icon: "RiToolsLine" },
+    { value: "faq", label: locale === 'zh' ? "问答" : "FAQ", icon: "RiQuestionAnswerLine" },
+    { value: "github", label: locale === 'zh' ? "开源项目" : "GitHub", icon: "RiGithubLine" },
+    { value: "blog", label: locale === 'zh' ? "博客" : "Blog", icon: "RiFileTextLine" }
+  ];
+
+  const sortOptions = [
+    { value: "relevance", label: locale === 'zh' ? "相关性" : "Relevance" },
+    { value: "latest", label: locale === 'zh' ? "最新" : "Latest" },
+    { value: "oldest", label: locale === 'zh' ? "最早" : "Oldest" },
+    { value: "rating", label: locale === 'zh' ? "评分" : "Rating" },
+    { value: "alphabetical", label: locale === 'zh' ? "字母顺序" : "A-Z" }
+  ];
+
   // Loading state
-  if (loading) {
+  if (newsLoading) {
     return (
       <div className="min-h-screen bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -144,10 +183,10 @@ export default function SearchContent({ locale, searchParams }: SearchContentPro
             </div>
           </div>
           
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-1">
             {Array.from({ length: 6 }).map((_, i) => (
               <div key={i} className="bg-white rounded-xl shadow-sm overflow-hidden">
-                <Skeleton className="w-full h-48" />
+                <Skeleton className="w-full h-32" />
                 <div className="p-6">
                   <Skeleton className="h-6 w-full mb-2" />
                   <Skeleton className="h-4 w-3/4 mb-4" />
@@ -169,7 +208,9 @@ export default function SearchContent({ locale, searchParams }: SearchContentPro
           <Alert variant="destructive" className="mb-8">
             <Icon name="RiErrorWarningLine" className="h-4 w-4" />
             <AlertDescription>
-              {error}. <Button variant="link" onClick={refresh} className="p-0 h-auto">Try again</Button>
+              {error}. <Button variant="link" onClick={() => window.location.reload()} className="p-0 h-auto">
+                {locale === 'zh' ? '重试' : 'Try again'}
+              </Button>
             </AlertDescription>
           </Alert>
         </div>
@@ -185,54 +226,147 @@ export default function SearchContent({ locale, searchParams }: SearchContentPro
           <div className="flex items-center gap-3 mb-4">
             <Icon name="RiSearchLine" className="h-8 w-8 text-blue-600" />
             <h1 className="text-3xl font-bold text-gray-900">
-              {searchQuery ? `Search Results for "${searchQuery}"` : "Search"}
+              {searchQuery ? 
+                (locale === 'zh' ? `"${searchQuery}" 的搜索结果` : `Search Results for "${searchQuery}"`) :
+                (locale === 'zh' ? '全站搜索' : 'Site Search')
+              }
             </h1>
           </div>
           
           {searchQuery && (
             <p className="text-lg text-gray-600 mb-6">
-              Found {searchResults.all.length} result{searchResults.all.length !== 1 ? 's' : ''} across all content
+              {locale === 'zh' ? 
+                `找到 ${totalResults} 个结果` : 
+                `Found ${totalResults} result${totalResults !== 1 ? 's' : ''}`
+              }
             </p>
           )}
 
           {/* Search Form */}
-          <form onSubmit={handleSearch} className="flex gap-4 mb-6">
-            <div className="flex-1">
-              <div className="relative">
+          <div className="relative">
+            <form onSubmit={handleSearch} className="flex gap-4 mb-6">
+              <div className="flex-1 relative">
                 <Icon name="RiSearchLine" className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                 <Input
-                  placeholder="Search news, tools, blog posts..."
+                  placeholder={locale === 'zh' ? 
+                    "搜索新闻、工具、问答、开源项目..." :
+                    "Search news, tools, FAQ, GitHub projects..."
+                  }
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    setShowSuggestions(true);
+                  }}
+                  onFocus={() => setShowSuggestions(true)}
+                  onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
                   className="pl-10"
                 />
               </div>
-            </div>
-            <Button type="submit" disabled={!searchQuery.trim()}>
-              Search
-            </Button>
-            {searchQuery && (
-              <Button type="button" variant="outline" onClick={handleClearSearch}>
-                Clear
+              <Button type="submit" disabled={!searchQuery.trim()}>
+                {locale === 'zh' ? '搜索' : 'Search'}
               </Button>
-            )}
-          </form>
+              {searchQuery && (
+                <Button type="button" variant="outline" onClick={handleClearSearch}>
+                  {locale === 'zh' ? '清除' : 'Clear'}
+                </Button>
+              )}
+            </form>
 
-          {/* Sort Options */}
+            {/* Search Suggestions */}
+            {showSuggestions && (searchHistory.length > 0 || suggestions.length > 0) && (
+              <div className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-lg shadow-lg z-10 max-h-64 overflow-y-auto">
+                {searchHistory.length > 0 && (
+                  <div className="p-4 border-b">
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="text-sm font-medium text-gray-700">
+                        {locale === 'zh' ? '搜索历史' : 'Search History'}
+                      </h4>
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        onClick={() => {
+                          clearSearchHistory();
+                          setSearchHistory([]);
+                        }}
+                        className="text-xs"
+                      >
+                        {locale === 'zh' ? '清除' : 'Clear'}
+                      </Button>
+                    </div>
+                    <div className="flex flex-wrap gap-1">
+                      {searchHistory.slice(0, 5).map((item, index) => (
+                        <Badge
+                          key={index}
+                          variant="secondary"
+                          className="cursor-pointer hover:bg-blue-100"
+                          onClick={() => handleSuggestionClick(item)}
+                        >
+                          {item}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                
+                {suggestions.length > 0 && (
+                  <div className="p-4">
+                    <h4 className="text-sm font-medium text-gray-700 mb-2">
+                      {locale === 'zh' ? '相关建议' : 'Suggestions'}
+                    </h4>
+                    <div className="flex flex-wrap gap-1">
+                      {suggestions.map((suggestion, index) => (
+                        <Badge
+                          key={index}
+                          variant="outline"
+                          className="cursor-pointer hover:bg-blue-50"
+                          onClick={() => handleSuggestionClick(suggestion)}
+                        >
+                          {suggestion}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Filters */}
           {searchQuery && (
-            <div className="flex items-center gap-4">
-              <span className="text-sm text-gray-600">Sort by:</span>
-              <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger className="w-48">
-                  <SelectValue placeholder="Sort by" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="relevance">Relevance</SelectItem>
-                  <SelectItem value="latest">Latest</SelectItem>
-                  <SelectItem value="oldest">Oldest</SelectItem>
-                  <SelectItem value="alphabetical">Alphabetical</SelectItem>
-                </SelectContent>
-              </Select>
+            <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+              <span className="text-sm text-gray-600 whitespace-nowrap">
+                {locale === 'zh' ? '筛选条件：' : 'Filters:'}
+              </span>
+              <div className="flex gap-4 flex-wrap">
+                <Select value={typeFilter} onValueChange={setTypeFilter}>
+                  <SelectTrigger className="w-48">
+                    <SelectValue placeholder={locale === 'zh' ? '内容类型' : 'Content Type'} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {typeOptions.map(option => (
+                      <SelectItem key={option.value} value={option.value}>
+                        <div className="flex items-center gap-2">
+                          <Icon name={option.icon} className="h-4 w-4" />
+                          {option.label}
+                        </div>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                
+                <Select value={sortBy} onValueChange={setSortBy}>
+                  <SelectTrigger className="w-48">
+                    <SelectValue placeholder={locale === 'zh' ? '排序方式' : 'Sort By'} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {sortOptions.map(option => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
           )}
         </header>
@@ -240,37 +374,47 @@ export default function SearchContent({ locale, searchParams }: SearchContentPro
         {/* Search Results */}
         {searchQuery ? (
           <div>
-            {searchResults.all.length > 0 ? (
-              <Tabs value={activeTab} onValueChange={setActiveTab}>
-                <TabsList className="grid w-full grid-cols-4 mb-8">
-                  <TabsTrigger value="all" className="flex items-center gap-2">
-                    <Icon name="RiGlobalLine" className="h-4 w-4" />
-                    All ({searchResults.all.length})
-                  </TabsTrigger>
-                  <TabsTrigger value="news" className="flex items-center gap-2">
-                    <Icon name="RiNewspaperLine" className="h-4 w-4" />
-                    News ({searchResults.news.length})
-                  </TabsTrigger>
-                  <TabsTrigger value="tools" className="flex items-center gap-2">
-                    <Icon name="RiToolsLine" className="h-4 w-4" />
-                    Tools ({searchResults.tools.length})
-                  </TabsTrigger>
-                  <TabsTrigger value="blog" className="flex items-center gap-2">
-                    <Icon name="RiFileTextLine" className="h-4 w-4" />
-                    Blog ({searchResults.blog.length})
-                  </TabsTrigger>
+            {loading ? (
+              <div className="space-y-6">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <div key={i} className="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <div className="p-6">
+                      <div className="flex items-start gap-4">
+                        <Skeleton className="w-16 h-16 rounded-xl" />
+                        <div className="flex-1">
+                          <Skeleton className="h-6 w-3/4 mb-2" />
+                          <Skeleton className="h-4 w-full mb-2" />
+                          <Skeleton className="h-4 w-2/3" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : searchResults.length > 0 ? (
+              <Tabs value={typeFilter} onValueChange={setTypeFilter}>
+                <TabsList className="grid w-full grid-cols-6 mb-8">
+                  {typeOptions.map(option => (
+                    <TabsTrigger key={option.value} value={option.value} className="flex items-center gap-2">
+                      <Icon name={option.icon} className="h-4 w-4" />
+                      <span className="hidden sm:inline">{option.label}</span>
+                      <span className="sm:hidden">{option.label.split(' ')[0]}</span>
+                      ({groupedResults[option.value as keyof typeof groupedResults].length})
+                    </TabsTrigger>
+                  ))}
                 </TabsList>
 
-                {(['all', 'news', 'tools', 'blog'] as const).map((tab) => (
-                  <TabsContent key={tab} value={tab}>
-                    {searchResults[tab].length > 0 ? (
-                      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                        {searchResults[tab].map((newsItem) => (
-                          <NewsCard
-                            key={newsItem.uuid}
-                            news={newsItem}
+                {typeOptions.map(option => (
+                  <TabsContent key={option.value} value={option.value}>
+                    {groupedResults[option.value as keyof typeof groupedResults].length > 0 ? (
+                      <div className="space-y-6">
+                        {groupedResults[option.value as keyof typeof groupedResults].map((result) => (
+                          <SearchResultCard
+                            key={`${result.type}-${result.id}`}
+                            result={result}
                             locale={locale}
                             variant="default"
+                            showType={option.value === 'all'}
                           />
                         ))}
                       </div>
@@ -278,10 +422,16 @@ export default function SearchContent({ locale, searchParams }: SearchContentPro
                       <div className="text-center py-12">
                         <Icon name="RiSearchEyeLine" className="h-16 w-16 text-gray-300 mx-auto mb-4" />
                         <h3 className="text-xl font-semibold text-gray-600 mb-2">
-                          No {tab === 'all' ? 'results' : tab} found
+                          {locale === 'zh' ? 
+                            `没有找到${option.label}内容` :
+                            `No ${option.label.toLowerCase()} found`
+                          }
                         </h3>
                         <p className="text-gray-500">
-                          Try adjusting your search terms or check other categories.
+                          {locale === 'zh' ? 
+                            '尝试调整搜索条件或查看其他类别。' :
+                            'Try adjusting your search terms or check other categories.'
+                          }
                         </p>
                       </div>
                     )}
@@ -292,19 +442,46 @@ export default function SearchContent({ locale, searchParams }: SearchContentPro
               <div className="text-center py-12">
                 <Icon name="RiSearchEyeLine" className="h-16 w-16 text-gray-300 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-gray-600 mb-2">
-                  No results found for "{searchQuery}"
+                  {locale === 'zh' ? 
+                    `没有找到 "${searchQuery}" 的结果` :
+                    `No results found for "${searchQuery}"`
+                  }
                 </h3>
                 <p className="text-gray-500 mb-6">
-                  Try different keywords or check your spelling.
+                  {locale === 'zh' ? 
+                    '尝试使用不同的关键词或检查拼写。' :
+                    'Try different keywords or check your spelling.'
+                  }
                 </p>
+                
+                {suggestions.length > 0 && (
+                  <div className="mb-6">
+                    <h4 className="text-sm font-medium text-gray-700 mb-2">
+                      {locale === 'zh' ? '试试这些相关搜索：' : 'Try these related searches:'}
+                    </h4>
+                    <div className="flex flex-wrap gap-2 justify-center">
+                      {suggestions.map((suggestion, index) => (
+                        <Badge
+                          key={index}
+                          variant="outline"
+                          className="cursor-pointer hover:bg-blue-50"
+                          onClick={() => handleSuggestionClick(suggestion)}
+                        >
+                          {suggestion}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button onClick={handleClearSearch} variant="outline">
-                    Clear Search
+                    {locale === 'zh' ? '清除搜索' : 'Clear Search'}
                   </Button>
                   <Link href="/">
                     <Button>
-                      <Icon name="RiNewspaperLine" className="mr-2 h-4 w-4" />
-                      Browse All News
+                      <Icon name="RiHomeLine" className="mr-2 h-4 w-4" />
+                      {locale === 'zh' ? '返回首页' : 'Back to Home'}
                     </Button>
                   </Link>
                 </div>
@@ -316,36 +493,27 @@ export default function SearchContent({ locale, searchParams }: SearchContentPro
           <div className="text-center py-12">
             <Icon name="RiSearchLine" className="h-16 w-16 text-gray-300 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-600 mb-2">
-              Search Gemini CLI Hub
+              {locale === 'zh' ? 'Gemini CLI Hub 全站搜索' : 'Search Gemini CLI Hub'}
             </h3>
             <p className="text-gray-500 mb-8 max-w-2xl mx-auto">
-              Find news, tool reviews, blog posts, and more. Use the search box above to discover relevant content across our entire platform.
+              {locale === 'zh' ? 
+                '搜索新闻、工具评测、FAQ问答、开源项目等内容。使用上方搜索框发现相关内容。' :
+                'Find news, tool reviews, FAQ, GitHub projects and more. Use the search box above to discover relevant content across our platform.'
+              }
             </p>
             
             {/* Popular Search Suggestions */}
             <div className="mb-8">
-              <h4 className="text-lg font-semibold text-gray-700 mb-4">Popular Searches</h4>
+              <h4 className="text-lg font-semibold text-gray-700 mb-4">
+                {locale === 'zh' ? '热门搜索' : 'Popular Searches'}
+              </h4>
               <div className="flex flex-wrap gap-2 justify-center">
-                {[
-                  "Gemini API",
-                  "CLI tools",
-                  "productivity",
-                  "automation",
-                  "development",
-                  "plugins",
-                  "tutorials",
-                  "workflow"
-                ].map((tag) => (
+                {getPopularSearchTerms(locale).map((tag) => (
                   <Badge
                     key={tag}
                     variant="secondary"
                     className="cursor-pointer hover:bg-blue-100 text-gray-600"
-                    onClick={() => {
-                      setSearchQuery(tag);
-                      const params = new URLSearchParams();
-                      params.set('q', tag);
-                      router.push(`/search?${params.toString()}`);
-                    }}
+                    onClick={() => handleSuggestionClick(tag)}
                   >
                     {tag}
                   </Badge>
@@ -354,30 +522,54 @@ export default function SearchContent({ locale, searchParams }: SearchContentPro
             </div>
 
             {/* Quick Navigation */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                              <Link href="/" className="group">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+              <Link href="/" className="group">
                 <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
                   <Icon name="RiNewspaperLine" className="h-8 w-8 text-blue-600 mx-auto mb-3" />
-                  <h4 className="font-semibold text-gray-900 mb-2">News Center</h4>
-                  <p className="text-sm text-gray-600">Latest Gemini CLI news and updates</p>
+                  <h4 className="font-semibold text-gray-900 mb-2">
+                    {locale === 'zh' ? '新闻中心' : 'News Center'}
+                  </h4>
+                  <p className="text-sm text-gray-600">
+                    {locale === 'zh' ? '最新的 Gemini CLI 新闻和更新' : 'Latest Gemini CLI news and updates'}
+                  </p>
                 </div>
               </Link>
               
               <Link href="/tools" className="group">
                 <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
                   <Icon name="RiToolsLine" className="h-8 w-8 text-green-600 mx-auto mb-3" />
-                  <h4 className="font-semibold text-gray-900 mb-2">Tool Reviews</h4>
-                  <p className="text-sm text-gray-600">Productivity tools and experiences</p>
+                  <h4 className="font-semibold text-gray-900 mb-2">
+                    {locale === 'zh' ? '工具评测' : 'Tool Reviews'}
+                  </h4>
+                  <p className="text-sm text-gray-600">
+                    {locale === 'zh' ? '生产力工具和使用体验' : 'Productivity tools and experiences'}
+                  </p>
                 </div>
               </Link>
               
               <Link href="/blog" className="group">
                 <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
                   <Icon name="RiFileTextLine" className="h-8 w-8 text-purple-600 mx-auto mb-3" />
-                  <h4 className="font-semibold text-gray-900 mb-2">Developer Blog</h4>
-                  <p className="text-sm text-gray-600">Technical articles and tutorials</p>
+                  <h4 className="font-semibold text-gray-900 mb-2">
+                    {locale === 'zh' ? '开发者博客' : 'Developer Blog'}
+                  </h4>
+                  <p className="text-sm text-gray-600">
+                    {locale === 'zh' ? '技术文章和教程' : 'Technical articles and tutorials'}
+                  </p>
                 </div>
               </Link>
+
+              <div className="group cursor-pointer" onClick={() => handleSuggestionClick('FAQ')}>
+                <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                  <Icon name="RiQuestionAnswerLine" className="h-8 w-8 text-orange-600 mx-auto mb-3" />
+                  <h4 className="font-semibold text-gray-900 mb-2">
+                    {locale === 'zh' ? '常见问题' : 'FAQ'}
+                  </h4>
+                  <p className="text-sm text-gray-600">
+                    {locale === 'zh' ? '使用帮助和问题解答' : 'Help documentation and Q&A'}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         )}

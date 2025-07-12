@@ -13,6 +13,7 @@ import { Link } from "@/i18n/navigation";
 import moment from "moment";
 import { TransformedNews } from "@/types/newsapi";
 import { useNews } from "@/hooks/use-news";
+import CommentSection from "@/components/blocks/comment-section";
 
 interface NewsDetailContentProps {
   locale: string;
@@ -304,7 +305,7 @@ export default function NewsDetailContent({ locale, slug }: NewsDetailContentPro
 
         {/* Related News */}
         {relatedNews.length > 0 && (
-          <section>
+          <section className="mb-12">
             <h2 className="text-2xl font-bold mb-6">Related Articles</h2>
             <div className="grid gap-6 md:grid-cols-3">
               {relatedNews.map((newsItem) => (
@@ -341,6 +342,18 @@ export default function NewsDetailContent({ locale, slug }: NewsDetailContentPro
             </div>
           </section>
         )}
+
+        {/* Comments Section */}
+        <section className="mb-8">
+          <CommentSection
+            title={locale === "zh" ? `"${currentNews.title}" 的讨论` : `Discussion for "${currentNews.title}"`}
+            identifier={`news-${currentNews.uuid}`}
+            category="General"
+            locale={locale}
+            showTitle={true}
+            showStats={true}
+          />
+        </section>
       </div>
     </div>
   );

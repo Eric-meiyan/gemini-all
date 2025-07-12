@@ -13,6 +13,7 @@ import { TransformedNews } from "@/types/newsapi";
 import HeroBanner from "@/components/blocks/hero-banner";
 import HeroCarousel, { newsToCarouselItem, type HeroCarouselItem } from "@/components/blocks/hero-carousel";
 import Statistics, { platformStats } from "@/components/blocks/statistics";
+import GitHubProjectsShowcase from "@/components/blocks/github-showcase";
 import NewsCard from "@/components/blocks/news/card";
 
 interface NewsContentProps {
@@ -172,17 +173,6 @@ export default function NewsContent({ locale, searchParams }: NewsContentProps) 
         {/* Hero Carousel */}
         <HeroCarousel items={createHeroCarouselItems()} locale={locale} />
 
-        {/* Platform Statistics */}
-        <Statistics 
-          title={locale === 'zh' ? '平台数据统计' : 'Platform Statistics'}
-          description={locale === 'zh' ? 
-            '实时数据展示我们不断增长的开发者社区和丰富的内容生态系统' : 
-            'Real-time data showcasing our growing developer community and rich content ecosystem'
-          }
-          stats={platformStats}
-          animated={true}
-        />
-
         {/* Main Content Layout */}
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Main Content Area */}
@@ -326,6 +316,31 @@ export default function NewsContent({ locale, searchParams }: NewsContentProps) 
             </div>
           </div>
         </div>
+
+        {/* GitHub Projects Showcase */}
+        <div className="mt-16 mb-12">
+          <GitHubProjectsShowcase
+            locale={locale}
+            title={locale === 'zh' ? '开源项目动态' : 'Open Source Project Updates'}
+            description={locale === 'zh' 
+              ? '关注热门AI开发工具的最新动态，包括版本发布、社区活跃度和项目健康状况。'
+              : 'Follow the latest updates from popular AI development tools, including releases, community activity, and project health.'
+            }
+            variant="list"
+            maxItems={3}
+          />
+        </div>
+
+        {/* Platform Statistics */}
+        <Statistics 
+          title={locale === 'zh' ? '平台数据统计' : 'Platform Statistics'}
+          description={locale === 'zh' ? 
+            '实时数据展示我们不断增长的开发者社区和丰富的内容生态系统' : 
+            'Real-time data showcasing our growing developer community and rich content ecosystem'
+          }
+          stats={platformStats}
+          animated={true}
+        />
       </div>
     </div>
   );
