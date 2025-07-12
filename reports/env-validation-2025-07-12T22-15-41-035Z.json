@@ -1,0 +1,136 @@
+{
+  "timestamp": "2025-07-12T22:15:41.035Z",
+  "results": {
+    "valid": [
+      {
+        "key": "NEXT_PUBLIC_GISCUS_REPO",
+        "status": "OK",
+        "masked": "Eric-meiyan/gemini-all"
+      },
+      {
+        "key": "NEXT_PUBLIC_GISCUS_REPO_ID",
+        "status": "OK",
+        "masked": "R_kgDOPFf58Q"
+      },
+      {
+        "key": "NEXT_PUBLIC_GISCUS_CATEGORY_ID",
+        "status": "OK",
+        "masked": "DIC_kwDOPFf58c4Cs2we"
+      }
+    ],
+    "invalid": [],
+    "missing": [
+      {
+        "key": "DATABASE_URL",
+        "description": "PostgreSQL database connection string",
+        "example": "postgresql://user:password@localhost:5432/geminicli_hub"
+      },
+      {
+        "key": "NEXTAUTH_SECRET",
+        "description": "Secret key for NextAuth.js authentication",
+        "example": "your-secret-key-here"
+      },
+      {
+        "key": "NEXTAUTH_URL",
+        "description": "Base URL for NextAuth.js callbacks",
+        "example": "https://your-domain.com"
+      },
+      {
+        "key": "NEXT_PUBLIC_WEB_URL",
+        "description": "Public web URL for the application",
+        "example": "https://geminicli.org"
+      }
+    ],
+    "warnings": [
+      {
+        "key": "OPENAI_API_KEY",
+        "message": "Optional environment variable not set: OPENAI_API_KEY",
+        "description": "OpenAI API key for AI features"
+      },
+      {
+        "key": "GOOGLE_GENERATIVE_AI_API_KEY",
+        "message": "Optional environment variable not set: GOOGLE_GENERATIVE_AI_API_KEY",
+        "description": "Google Gemini API key"
+      },
+      {
+        "key": "STRIPE_SECRET_KEY",
+        "message": "Optional environment variable not set: STRIPE_SECRET_KEY",
+        "description": "Stripe secret key for payments"
+      },
+      {
+        "key": "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
+        "message": "Optional environment variable not set: NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
+        "description": "Stripe publishable key"
+      },
+      {
+        "key": "STRIPE_WEBHOOK_SECRET",
+        "message": "Optional environment variable not set: STRIPE_WEBHOOK_SECRET",
+        "description": "Stripe webhook secret for payment verification"
+      },
+      {
+        "key": "EMAIL_SERVER_HOST",
+        "message": "Optional environment variable not set: EMAIL_SERVER_HOST",
+        "description": "SMTP server host for email"
+      },
+      {
+        "key": "EMAIL_SERVER_PORT",
+        "message": "Optional environment variable not set: EMAIL_SERVER_PORT",
+        "description": "SMTP server port"
+      },
+      {
+        "key": "EMAIL_SERVER_USER",
+        "message": "Optional environment variable not set: EMAIL_SERVER_USER",
+        "description": "SMTP username"
+      },
+      {
+        "key": "EMAIL_SERVER_PASSWORD",
+        "message": "Optional environment variable not set: EMAIL_SERVER_PASSWORD",
+        "description": "SMTP password"
+      },
+      {
+        "key": "EMAIL_FROM",
+        "message": "Optional environment variable not set: EMAIL_FROM",
+        "description": "From email address"
+      }
+    ],
+    "recommendations": [
+      {
+        "category": "Database",
+        "recommendation": "Set up PostgreSQL database and configure DATABASE_URL",
+        "priority": "High",
+        "description": "Database is required for user management, content storage, and application functionality"
+      },
+      {
+        "category": "Security",
+        "recommendation": "Generate a strong NEXTAUTH_SECRET",
+        "priority": "High",
+        "description": "Use: openssl rand -base64 32"
+      },
+      {
+        "category": "Performance",
+        "recommendation": "Configure caching with Redis",
+        "priority": "Medium",
+        "description": "Add REDIS_URL for improved performance and session storage"
+      },
+      {
+        "category": "Monitoring",
+        "recommendation": "Set up error tracking",
+        "priority": "Medium",
+        "description": "Configure Sentry or similar service for error monitoring"
+      },
+      {
+        "category": "Backup",
+        "recommendation": "Configure automated database backups",
+        "priority": "High",
+        "description": "Set up regular backups of PostgreSQL database"
+      }
+    ]
+  },
+  "summary": {
+    "total": 7,
+    "valid": 3,
+    "invalid": 0,
+    "missing": 4,
+    "warnings": 10
+  }
+}
