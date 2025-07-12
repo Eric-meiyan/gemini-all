@@ -12,6 +12,7 @@ import { useNews } from "@/hooks/use-news";
 import { TransformedNews } from "@/types/newsapi";
 import HeroBanner from "@/components/blocks/hero-banner";
 import HeroCarousel, { newsToCarouselItem, type HeroCarouselItem } from "@/components/blocks/hero-carousel";
+import Statistics, { platformStats } from "@/components/blocks/statistics";
 import NewsCard from "@/components/blocks/news/card";
 
 interface NewsContentProps {
@@ -170,6 +171,17 @@ export default function NewsContent({ locale, searchParams }: NewsContentProps) 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero Carousel */}
         <HeroCarousel items={createHeroCarouselItems()} locale={locale} />
+
+        {/* Platform Statistics */}
+        <Statistics 
+          title={locale === 'zh' ? '平台数据统计' : 'Platform Statistics'}
+          description={locale === 'zh' ? 
+            '实时数据展示我们不断增长的开发者社区和丰富的内容生态系统' : 
+            'Real-time data showcasing our growing developer community and rich content ecosystem'
+          }
+          stats={platformStats}
+          animated={true}
+        />
 
         {/* Main Content Layout */}
         <div className="flex flex-col lg:flex-row gap-8">
