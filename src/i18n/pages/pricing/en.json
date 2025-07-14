@@ -1,108 +1,156 @@
 {
   "pricing": {
     "name": "pricing",
-    "label": "Pricing",
-    "title": "Pricing",
-    "description": "Get all features of ShipAny, Ship your AI SaaS startups fast.",
-    "groups": [],
-    "items": [
+    "label": "Gemini CLI Pricing",
+    "title": "Gemini CLI Pricing Guide - Complete Cost Analysis 2025",
+    "description": "Complete Gemini CLI pricing guide with Google Gemini API costs, usage calculator, and cost optimization tips. Updated for 2025 with latest pricing.",
+    "sections": [
       {
-        "title": "Starter",
-        "description": "Get started with your first SaaS startup.",
-        "features_title": "Includes",
-        "features": [
-          "100 credits, valid for 1 month",
-          "NextJS boilerplate",
-          "SEO-friendly structure",
-          "Payment with Stripe",
-          "Data storage with Supabase",
-          "Google Oauth & One-Tap Login",
-          "i18n support"
-        ],
-        "interval": "one-time",
-        "amount": 9900,
-        "cn_amount": 69900,
-        "currency": "USD",
-        "price": "$99",
-        "original_price": "$199",
-        "unit": "USD",
-        "is_featured": false,
-        "tip": "Pay once. Build unlimited projects!",
-        "button": {
-          "title": "Get ShipAny",
-          "url": "/#pricing",
-          "icon": "RiFlashlightFill"
-        },
-        "product_id": "starter",
-        "product_name": "ShipAny Boilerplate Starter",
-        "credits": 100,
-        "valid_months": 1
+        "id": "api-models",
+        "title": "Google Gemini API Pricing",
+        "description": "Current pricing for all Gemini API models as of 2025",
+        "type": "table",
+        "data": [
+          {
+            "model": "Gemini 2.5 Pro",
+            "input_price": "$1.25",
+            "output_price": "$10.00",
+            "unit": "per million tokens",
+            "context_limit": "Up to 200k tokens",
+            "features": ["Highest accuracy", "Complex reasoning", "Premium model"],
+            "note": "For 200k+ tokens: $2.50 input / $15.00 output"
+          },
+          {
+            "model": "Gemini 2.0 Flash",
+            "input_price": "$0.10",
+            "output_price": "$0.40",
+            "unit": "per million tokens",
+            "context_limit": "All context lengths",
+            "features": ["Best value", "Recommended for most use cases", "No context length distinction"],
+            "note": "Single pricing for all context lengths"
+          },
+          {
+            "model": "Gemini 1.5 Pro",
+            "input_price": "$1.25",
+            "output_price": "$5.00",
+            "unit": "per million tokens",
+            "context_limit": "Up to 128k tokens",
+            "features": ["High quality", "Good for complex tasks", "Context caching available"],
+            "note": "Context caching: $0.625 per million tokens"
+          },
+          {
+            "model": "Gemini 1.5 Flash",
+            "input_price": "Free",
+            "output_price": "Free",
+            "unit": "with limits",
+            "context_limit": "Standard limits",
+            "features": ["Free tier available", "Perfect for development", "No credit card required"],
+            "note": "15 requests/min, 1M tokens/min, 1,500 requests/day"
+          }
+        ]
       },
       {
-        "title": "Standard",
-        "description": "Ship Fast with your SaaS Startups.",
-        "label": "Popular",
-        "features_title": "Everything in Starter, plus",
-        "features": [
-          "200 credits, valid for 3 month",
-          "Deploy with Vercel or Cloudflare",
-          "Generation of Privacy & Terms",
-          "Google Analytics Integration",
-          "Google Search Console Integration",
-          "Discord community",
-          "Technical support for your first ship",
-          "Lifetime updates"
-        ],
-        "interval": "one-time",
-        "amount": 19900,
-        "cn_amount": 139900,
-        "currency": "USD",
-        "price": "$199",
-        "original_price": "$299",
-        "unit": "USD",
-        "is_featured": true,
-        "tip": "Pay once. Build unlimited projects!",
-        "button": {
-          "title": "Get ShipAny",
-          "url": "/#pricing",
-          "icon": "RiFlashlightFill"
-        },
-        "product_id": "standard",
-        "product_name": "ShipAny Boilerplate Standard",
-        "credits": 200,
-        "valid_months": 3
+        "id": "free-tier",
+        "title": "Free Tier Limits",
+        "description": "What you can do with Gemini API for free",
+        "type": "info",
+        "data": {
+          "gemini_15_flash": {
+            "name": "Gemini 1.5 Flash",
+            "limits": [
+              "15 requests per minute",
+              "1 million tokens per minute",
+              "1,500 requests per day",
+              "Completely free in Google AI Studio",
+              "No credit card required"
+            ]
+          },
+          "gemini_15_pro": {
+            "name": "Gemini 1.5 Pro",
+            "limits": [
+              "2 requests per minute",
+              "32,000 tokens per minute",
+              "50 requests per day",
+              "Free tier available"
+            ]
+          }
+        }
       },
       {
-        "title": "Premium",
-        "description": "Ship Any AI SaaS Startups.",
-        "features_title": "Everything in Standard, plus",
-        "features": [
-          "300 credits, valid for 1 year",
-          "Business Functions with AI",
-          "User Center",
-          "Credits System",
-          "API Sales for your SaaS",
-          "Admin System",
-          "Priority Technical Support"
-        ],
-        "interval": "one-time",
-        "amount": 29900,
-        "cn_amount": 199900,
-        "currency": "USD",
-        "price": "$299",
-        "original_price": "$399",
-        "unit": "USD",
-        "is_featured": false,
-        "tip": "Pay once. Build unlimited projects!",
-        "button": {
-          "title": "Get ShipAny",
-          "url": "/#pricing",
-          "icon": "RiFlashlightFill"
-        },
-        "product_id": "premium",
-        "product_name": "ShipAny Boilerplate Premium",
-        "credits": 300,
-        "valid_months": 12
+        "id": "cost-optimization",
+        "title": "Cost Optimization Tips",
+        "description": "How to minimize your Gemini CLI costs",
+        "type": "list",
+        "data": [
+          {
+            "tip": "Use Batch Mode",
+            "description": "Get 50% discount on all requests by using batch processing",
+            "savings": "Up to 50%"
+          },
+          {
+            "tip": "Start with Free Tier",
+            "description": "Use Gemini 1.5 Flash free tier for development and testing",
+            "savings": "100% for testing"
+          },
+          {
+            "tip": "Optimize Prompts",
+            "description": "Reduce token usage by crafting efficient prompts",
+            "savings": "20-40%"
+          },
+          {
+            "tip": "Use Context Caching",
+            "description": "Cache repeated context for multiple related queries",
+            "savings": "Up to 80% for repeated context"
+          },
+          {
+            "tip": "Choose Right Model",
+            "description": "Use Gemini 2.0 Flash for most tasks, only use Pro for complex reasoning",
+            "savings": "75% vs Pro models"
+          }
+        ]
+      },
+      {
+        "id": "comparison",
+        "title": "Gemini vs Other AI APIs",
+        "description": "How Gemini pricing compares to competitors",
+        "type": "comparison",
+        "data": [
+          {
+            "provider": "Gemini 2.0 Flash",
+            "input_price": "$0.10",
+            "output_price": "$0.40",
+            "note": "Best value for most use cases"
+          },
+          {
+            "provider": "ChatGPT-4o",
+            "input_price": "$2.50",
+            "output_price": "$10.00",
+            "note": "25x more expensive than Gemini Flash"
+          },
+          {
+            "provider": "Claude 3.5 Sonnet",
+            "input_price": "$3.00",
+            "output_price": "$15.00",
+            "note": "30x more expensive than Gemini Flash"
+          }
+        ]
+      }
+    ],
+    "official_links": [
+      {
+        "title": "Google Gemini API Documentation",
+        "url": "https://ai.google.dev/gemini-api/docs/pricing",
+        "description": "Official pricing and documentation"
+      },
+      {
+        "title": "Google AI Studio",
+        "url": "https://ai.google.dev/gemini-api/docs/get-started",
+        "description": "Start using Gemini API for free"
+      },
+      {
+        "title": "Gemini API Billing",
+        "url": "https://ai.google.dev/gemini-api/docs/billing",
+        "description": "How billing works"
       }
     ]
   }

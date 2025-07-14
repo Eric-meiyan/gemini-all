@@ -1,108 +1,156 @@
 {
   "pricing": {
     "name": "pricing",
-    "label": "定价",
-    "title": "定价",
-    "description": "获取 ShipAny 的所有功能，快速启动您的 AI SaaS 创业项目。",
-    "groups": [],
-    "items": [
+    "label": "Gemini CLI 定价",
+    "title": "Gemini CLI 定价指南 - 完整成本分析 2025",
+    "description": "完整的 Gemini CLI 定价指南，包含 Google Gemini API 成本、使用计算器和成本优化技巧。2025年最新定价。",
+    "sections": [
       {
-        "title": "入门版",
-        "description": "开始您的第一个 SaaS 创业项目。",
-        "features_title": "包含",
-        "features": [
-          "100 积分，有效期 1 个月",
-          "NextJS 模板",
-          "SEO 友好结构",
-          "Stripe 支付",
-          "Supabase 数据存储",
-          "Google OAuth 和一键登录",
-          "国际化支持"
-        ],
-        "interval": "one-time",
-        "amount": 9900,
-        "cn_amount": 69900,
-        "currency": "USD",
-        "price": "$99",
-        "original_price": "$199",
-        "unit": "USD",
-        "is_featured": false,
-        "tip": "一次付费，无限项目！",
-        "button": {
-          "title": "获取 ShipAny",
-          "url": "/#pricing",
-          "icon": "RiFlashlightFill"
-        },
-        "product_id": "starter",
-        "product_name": "ShipAny 模板入门版",
-        "credits": 100,
-        "valid_months": 1
+        "id": "api-models",
+        "title": "Google Gemini API 定价",
+        "description": "2025年所有 Gemini API 模型的当前定价",
+        "type": "table",
+        "data": [
+          {
+            "model": "Gemini 2.5 Pro",
+            "input_price": "$1.25",
+            "output_price": "$10.00",
+            "unit": "每百万 token",
+            "context_limit": "200k token 以内",
+            "features": ["最高准确率", "复杂推理", "高级模型"],
+            "note": "200k+ token：$2.50 输入 / $15.00 输出"
+          },
+          {
+            "model": "Gemini 2.0 Flash",
+            "input_price": "$0.10",
+            "output_price": "$0.40",
+            "unit": "每百万 token",
+            "context_limit": "所有上下文长度",
+            "features": ["最佳性价比", "推荐大多数使用场景", "无上下文长度区分"],
+            "note": "所有上下文长度单一定价"
+          },
+          {
+            "model": "Gemini 1.5 Pro",
+            "input_price": "$1.25",
+            "output_price": "$5.00",
+            "unit": "每百万 token",
+            "context_limit": "128k token 以内",
+            "features": ["高质量", "适合复杂任务", "支持上下文缓存"],
+            "note": "上下文缓存：每百万 token $0.625"
+          },
+          {
+            "model": "Gemini 1.5 Flash",
+            "input_price": "免费",
+            "output_price": "免费",
+            "unit": "有限制",
+            "context_limit": "标准限制",
+            "features": ["免费额度可用", "完美适合开发", "无需信用卡"],
+            "note": "15 次请求/分钟，100万 token/分钟，1,500 次请求/天"
+          }
+        ]
       },
       {
-        "title": "标准版",
-        "description": "快速启动您的 SaaS 创业项目。",
-        "label": "热门",
-        "features_title": "包含入门版所有功能，另加",
-        "features": [
-          "200 积分，有效期 3 个月",
-          "Vercel 或 Cloudflare 部署",
-          "隐私和条款生成",
-          "Google Analytics 集成",
-          "Google Search Console 集成",
-          "Discord 社区",
-          "首次发布技术支持",
-          "终身更新"
-        ],
-        "interval": "one-time",
-        "amount": 19900,
-        "cn_amount": 139900,
-        "currency": "USD",
-        "price": "$199",
-        "original_price": "$299",
-        "unit": "USD",
-        "is_featured": true,
-        "tip": "一次付费，无限项目！",
-        "button": {
-          "title": "获取 ShipAny",
-          "url": "/#pricing",
-          "icon": "RiFlashlightFill"
-        },
-        "product_id": "standard",
-        "product_name": "ShipAny 模板标准版",
-        "credits": 200,
-        "valid_months": 3
+        "id": "free-tier",
+        "title": "免费额度限制",
+        "description": "Gemini API 免费使用的限制",
+        "type": "info",
+        "data": {
+          "gemini_15_flash": {
+            "name": "Gemini 1.5 Flash",
+            "limits": [
+              "每分钟 15 次请求",
+              "每分钟 100 万 token",
+              "每天 1,500 次请求",
+              "Google AI Studio 完全免费",
+              "无需信用卡"
+            ]
+          },
+          "gemini_15_pro": {
+            "name": "Gemini 1.5 Pro",
+            "limits": [
+              "每分钟 2 次请求",
+              "每分钟 32,000 token",
+              "每天 50 次请求",
+              "免费额度可用"
+            ]
+          }
+        }
       },
       {
-        "title": "高级版",
-        "description": "构建任何 AI SaaS 创业项目。",
-        "features_title": "包含标准版所有功能，另加",
-        "features": [
-          "300 积分，有效期 1 年",
-          "AI 业务功能",
-          "用户中心",
-          "积分系统",
-          "SaaS API 销售",
-          "管理系统",
-          "优先技术支持"
-        ],
-        "interval": "one-time",
-        "amount": 29900,
-        "cn_amount": 199900,
-        "currency": "USD",
-        "price": "$299",
-        "original_price": "$399",
-        "unit": "USD",
-        "is_featured": false,
-        "tip": "一次付费，无限项目！",
-        "button": {
-          "title": "获取 ShipAny",
-          "url": "/#pricing",
-          "icon": "RiFlashlightFill"
-        },
-        "product_id": "premium",
-        "product_name": "ShipAny 模板高级版",
-        "credits": 300,
-        "valid_months": 12
+        "id": "cost-optimization",
+        "title": "成本优化技巧",
+        "description": "如何最小化您的 Gemini CLI 成本",
+        "type": "list",
+        "data": [
+          {
+            "tip": "使用批处理模式",
+            "description": "通过批处理获得所有请求 50% 折扣",
+            "savings": "最多 50%"
+          },
+          {
+            "tip": "从免费版开始",
+            "description": "使用 Gemini 1.5 Flash 免费版进行开发和测试",
+            "savings": "测试 100% 免费"
+          },
+          {
+            "tip": "优化提示词",
+            "description": "通过精心设计的提示词减少 token 使用",
+            "savings": "20-40%"
+          },
+          {
+            "tip": "使用上下文缓存",
+            "description": "为多个相关查询缓存重复上下文",
+            "savings": "重复上下文最多 80%"
+          },
+          {
+            "tip": "选择合适的模型",
+            "description": "大多数任务使用 Gemini 2.0 Flash，只在复杂推理时使用 Pro",
+            "savings": "相比 Pro 模型 75%"
+          }
+        ]
+      },
+      {
+        "id": "comparison",
+        "title": "Gemini vs 其他 AI API",
+        "description": "Gemini 定价与竞争对手的比较",
+        "type": "comparison",
+        "data": [
+          {
+            "provider": "Gemini 2.0 Flash",
+            "input_price": "$0.10",
+            "output_price": "$0.40",
+            "note": "大多数使用场景的最佳选择"
+          },
+          {
+            "provider": "ChatGPT-4o",
+            "input_price": "$2.50",
+            "output_price": "$10.00",
+            "note": "比 Gemini Flash 贵 25 倍"
+          },
+          {
+            "provider": "Claude 3.5 Sonnet",
+            "input_price": "$3.00",
+            "output_price": "$15.00",
+            "note": "比 Gemini Flash 贵 30 倍"
+          }
+        ]
+      }
+    ],
+    "official_links": [
+      {
+        "title": "Google Gemini API 文档",
+        "url": "https://ai.google.dev/gemini-api/docs/pricing",
+        "description": "官方定价和文档"
+      },
+      {
+        "title": "Google AI Studio",
+        "url": "https://ai.google.dev/gemini-api/docs/get-started",
+        "description": "免费开始使用 Gemini API"
+      },
+      {
+        "title": "Gemini API 计费",
+        "url": "https://ai.google.dev/gemini-api/docs/billing",
+        "description": "了解计费方式"
       }
     ]
   }
